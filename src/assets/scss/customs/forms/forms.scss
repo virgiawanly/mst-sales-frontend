@@ -1,0 +1,11 @@
+.form-control {
+  @apply border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100  dark:disabled:bg-zink-500 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-400 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-400 focus:ring-1 focus:ring-custom-500 dark:focus:ring-custom-400 placeholder:text-slate-400 dark:placeholder:text-zink-200;
+
+  &:not(.flatpickr-input) {
+    @apply read-only:bg-slate-100 dark:read-only:bg-zink-500 dark:read-only:text-zink-200;
+  }
+}
+
+.form-invalid {
+  @apply bg-red-50 border border-red-500 text-red-900 placeholder-red-700 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500;
+}

@@ -1,0 +1,35 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <button type="submit" class="hidden"></button>
+  <div class="grid grid-cols-1 gap-5 lg:grid-cols-2 xl:grid-cols-12">
+    <div class="xl:col-span-12">
+      <label for="kode" class="inline-block mb-2 text-base font-medium">Kode Barang <span class="text-red-500">*</span></label>
+      <input type="text" id="kode" formControlName="kode" class="form-input form-control" placeholder="Input kode barang" maxlength="10" />
+      @if (form.get('kode')?.hasError('required') && form.get('kode')?.touched) {
+        <div class="mt-1 text-red-500 text-sm">Kode barang is required</div>
+      } @else if (form.get('kode')?.hasError('maxLength') && form.get('kode')?.touched) {
+        <div class="mt-1 text-red-500 text-sm">Kode barang cannot be longer than 10 characters</div>
+      }
+    </div>
+    <!--end col-->
+    <div class="xl:col-span-12">
+      <label for="nama" class="inline-block mb-2 text-base font-medium">Nama <span class="text-red-500">*</span></label>
+      <input type="text" id="nama" formControlName="nama" class="form-input form-control" placeholder="Input nama barang" maxlength="100" />
+      @if (form.get('nama')?.hasError('required') && form.get('nama')?.touched) {
+        <div class="mt-1 text-red-500 text-sm">Nama barang is required</div>
+      } @else if (form.get('nama')?.hasError('maxLength') && form.get('nama')?.touched) {
+        <div class="mt-1 text-red-500 text-sm">Nama barang cannot be longer than 100 characters</div>
+      }
+    </div>
+    <!--end col-->
+    <div class="xl:col-span-12">
+      <label for="harga" class="inline-block mb-2 text-base font-medium">Harga Barang <span class="text-red-500">*</span></label>
+      <input type="number" id="harga" formControlName="harga" class="form-input form-control" placeholder="Input harga barang" />
+      @if (form.get('harga')?.hasError('required') && form.get('harga')?.touched) {
+        <div class="mt-1 text-red-500 text-sm">Harga barang is required</div>
+      } @else if (form.get('harga')?.hasError('min') && form.get('harga')?.touched) {
+        <div class="mt-1 text-red-500 text-sm">Harga barang must be greater than or equal to 0</div>
+      }
+    </div>
+    <!--end col-->
+  </div>
+</form>

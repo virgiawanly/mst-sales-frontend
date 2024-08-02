@@ -2,31 +2,45 @@ import { MenuItem } from './menu.model';
 
 export const MENU: MenuItem[] = [
   {
-    id: 12,
+    id: 0,
     label: 'Transaksi',
     isTitle: true,
   },
   {
-    id: 13,
+    id: 1,
     label: 'Sales',
     icon: 'baggage-claim',
-    link: '/application/sales',
+    link: '#',
+    subItems: [
+      {
+        id: 1.1,
+        label: 'Sales List',
+        link: '/application/sales',
+        parentId: 8,
+      },
+      {
+        id: 1.2,
+        label: 'New Sales',
+        link: '/application/sales/create',
+        parentId: 8,
+      },
+    ],
   },
   {
-    id: 0,
+    id: 2,
     label: 'Master Data',
     isTitle: true,
   },
   {
-    id: 1,
+    id: 3,
     label: 'Barang',
     icon: 'package',
     link: '/application/barang',
   },
   {
-    id: 11,
+    id: 4,
     label: 'Customer',
     icon: 'users',
-    link: '/application/customers',
+    link: '/application/customer',
   },
 ];

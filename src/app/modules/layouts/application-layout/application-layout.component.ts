@@ -56,7 +56,7 @@ export class ApplicationLayoutComponent {
     this._store.dispatch(fetchUser());
 
     // Uncomment this to use local storage user
-    // const userProfile = localStorage.getItem('mstsalesAdmin@userProfile');
+    // const userProfile = localStorage.getItem('mstSalesAdmin@userProfile');
     // if (userProfile) {
     //   this._store.dispatch(setUser({ user: JSON.parse(userProfile ?? '{}') }));
     // } else {

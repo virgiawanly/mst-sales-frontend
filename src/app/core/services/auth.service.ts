@@ -49,7 +49,7 @@ export class AuthService {
       return throwError(() => new Error('User is already logged in.'));
     }
 
-    return this._http.post(`${environment.api_url}/backoffice/auth/login`, credentials).pipe(
+    return this._http.post(`${environment.api_url}/web/auth/login`, credentials).pipe(
       switchMap((res: any) => {
         this.apiToken = res?.data?.token;
         this._isAuthenticated.next(true);

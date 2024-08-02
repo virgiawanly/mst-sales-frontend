@@ -15,7 +15,7 @@ export class UserEffects {
     () => {
       return this.actions$.pipe(
         ofType(setUser),
-        tap((action) => localStorage.setItem('mstsalesAdmin@userProfile', JSON.stringify(action.user))),
+        tap((action) => localStorage.setItem('mstSalesAdmin@userProfile', JSON.stringify(action.user))),
         exhaustMap(() => of(noop())),
       );
     },
@@ -26,8 +26,8 @@ export class UserEffects {
     return this.actions$.pipe(
       ofType(fetchUser),
       exhaustMap(() => {
-        return this._httpService.get('backoffice/auth/user').pipe(
-          map((res: any) => fetchUserSuccess({ user: res.data })),
+        return this._httpService.get('web/auth/user').pipe(
+          map((res: any) => fetchUserSuccess({ user: res.data.user })),
           catchError((error) => of(fetchUserError({ error }))),
         );
       }),

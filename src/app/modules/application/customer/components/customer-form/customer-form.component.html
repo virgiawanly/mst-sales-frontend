@@ -1,0 +1,35 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <button type="submit" class="hidden"></button>
+  <div class="grid grid-cols-1 gap-5 lg:grid-cols-2 xl:grid-cols-12">
+    <div class="xl:col-span-12">
+      <label for="kode" class="inline-block mb-2 text-base font-medium">Kode Customer <span class="text-red-500">*</span></label>
+      <input type="text" id="kode" formControlName="kode" class="form-input form-control" placeholder="Input kode customer" maxlength="10" />
+      @if (form.get('kode')?.hasError('required') && form.get('kode')?.touched) {
+        <div class="mt-1 text-red-500 text-sm">Kode customer is required</div>
+      } @else if (form.get('kode')?.hasError('maxLength') && form.get('kode')?.touched) {
+        <div class="mt-1 text-red-500 text-sm">Kode customer cannot be longer than 10 characters</div>
+      }
+    </div>
+    <!--end col-->
+    <div class="xl:col-span-12">
+      <label for="nama" class="inline-block mb-2 text-base font-medium">Nama Customer <span class="text-red-500">*</span></label>
+      <input type="text" id="nama" formControlName="nama" class="form-input form-control" placeholder="Input nama customer" maxlength="100" />
+      @if (form.get('nama')?.hasError('required') && form.get('nama')?.touched) {
+        <div class="mt-1 text-red-500 text-sm">Nama customer is required</div>
+      } @else if (form.get('nama')?.hasError('maxLength') && form.get('nama')?.touched) {
+        <div class="mt-1 text-red-500 text-sm">Nama customer cannot be longer than 100 characters</div>
+      }
+    </div>
+    <!--end col-->
+    <div class="xl:col-span-12">
+      <label for="telp" class="inline-block mb-2 text-base font-medium">Telp <span class="text-red-500">*</span></label>
+      <input type="text" id="telp" formControlName="telp" class="form-input form-control" placeholder="Input telp customer" maxlength="20" />
+      @if (form.get('telp')?.hasError('required') && form.get('telp')?.touched) {
+        <div class="mt-1 text-red-500 text-sm">Telp customer is required</div>
+      } @else if (form.get('telp')?.hasError('maxLength') && form.get('telp')?.touched) {
+        <div class="mt-1 text-red-500 text-sm">Telp customer cannot be longer than 20 characters</div>
+      }
+    </div>
+    <!--end col-->
+  </div>
+</form>

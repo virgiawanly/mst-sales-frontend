@@ -1,3 +1,7 @@
 @import './forms/forms.scss';
 @import './icon/circle-icon.scss';
-@import './extension/ckeditor.scss';
+@import './extensions/ckeditor.scss';
+
+.bg-skeleton {
+  @apply bg-slate-200 dark:bg-zink-500 animate-pulse;
+}

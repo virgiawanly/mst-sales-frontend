@@ -70,7 +70,7 @@ export class BarangIndexComponent {
 
   ngOnInit() {
     this.getBarang();
-    this._barangSearchListener$.pipe(debounceTime(300), takeUntil(this._unsubscribeAll$)).subscribe((search) => {
+    this._barangSearchListener$.pipe(debounceTime(500), takeUntil(this._unsubscribeAll$)).subscribe((search) => {
       this.barangSearch = search;
       this.getBarang();
     });

@@ -1,6 +1,6 @@
 export interface Barang {
   id: number;
   kode: string;
-  name: string;
+  nama: string;
   harga: string;
 }

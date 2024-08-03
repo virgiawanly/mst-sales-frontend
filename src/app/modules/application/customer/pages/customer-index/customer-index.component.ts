@@ -70,7 +70,7 @@ export class CustomerIndexComponent {
 
   ngOnInit() {
     this.getCustomer();
-    this._customerSearchListener$.pipe(debounceTime(300), takeUntil(this._unsubscribeAll$)).subscribe((search) => {
+    this._customerSearchListener$.pipe(debounceTime(500), takeUntil(this._unsubscribeAll$)).subscribe((search) => {
       this.customerSearch = search;
       this.getCustomer();
     });

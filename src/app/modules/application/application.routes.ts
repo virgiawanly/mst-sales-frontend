@@ -23,6 +23,11 @@ export const APPLICATION_ROUTES: Routes = [
         loadChildren: () => import('./customer/customer.routes').then((m) => m.CUSTOMER_ROUTES),
       },
       {
+        path: 'sales',
+        canActivate: [authGuard],
+        loadChildren: () => import('./sales/sales.routes').then((m) => m.SALES_ROUTES),
+      },
+      {
         path: '**',
         pathMatch: 'full',
         redirectTo: 'dashboard',

@@ -1,6 +1,6 @@
 export interface Customer {
   id: number;
   kode: string;
-  name: string;
+  nama: string;
   telp: string;
 }

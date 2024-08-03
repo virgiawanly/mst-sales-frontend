@@ -1,0 +1,98 @@
+<!-- Approval Modal -->
+<ng-modals [id]="modalId!" [placement]="'modal-center'" className="fixed flex flex-col transition-all duration-300 ease-in-out left-2/4 z-drawer -translate-x-2/4 -translate-y-2/4">
+  <div class="w-screen md:w-[40rem] bg-white shadow rounded-md dark:bg-zink-700 flex flex-col h-full">
+    <div class="flex items-center justify-between p-4 border-b border-slate-200 dark:border-zink-500">
+      <h5 class="text-16">Pilih Barang</h5>
+      <button dismissModal [ModalDismiss]="modalId!" class="transition-all duration-200 ease-linear text-slate-500 hover:text-red-500 dark:text-zink-200 dark:hover:text-red-500">
+        <lucide-angular name="x" [class]="'size-5'"></lucide-angular>
+      </button>
+    </div>
+    <div class="max-h-[calc(theme('height.screen')_-_180px)] p-4 overflow-y-auto">
+      <div class="w-full grid gap-5">
+        <div class="relative md:col-span-6 lg:col-span-4">
+          <input
+            #barangSearchInput
+            type="text"
+            class="ltr:pl-8 rtl:pr-8 search form-input form-control"
+            placeholder="Cari berdasarkan kode atau nama..."
+            autocomplete="off"
+            [(ngModel)]="barangSearch"
+            (ngModelChange)="onSearchBarangs($event)"
+          />
+          <lucide-angular
+            name="search"
+            [class]="'inline-block size-4 absolute ltr:left-2.5 rtl:right-2.5 top-2.5 text-slate-500 dark:text-zink-200 fill-slate-100 dark:fill-zink-600'"
+          ></lucide-angular>
+        </div>
+      </div>
+      @if (!isLoadingBarangs && barangs.length) {
+        <div class="grid w-full divide-y divide-gray-100 dark:divide-zink-500 mt-5">
+          @for (barang of barangs; track $index) {
+            <div class="w-full flex items-center justify-between gap-4 py-4">
+              <div class="w-fit">
+                <div class="w-12 h-12 bg-slate-200 dark:bg-zink-500 aspect-square rounded-full grid place-items-center text-custom-800 dark:text-white uppercase">
+                  <lucide-angular name="box" [class]="'inline-block size-6'"></lucide-angular>
+                </div>
+              </div>
+              <div class="flex-1 flex flex-col">
+                <h6 class="font-semibold text-gray-900 dark:text-white line-clamp-1">{{ barang.kode }} - {{ barang.nama }}</h6>
+                <p class="text-slate-500 dark:text-zink-100">Rp {{ barang.harga | number: '1.2-2' }}</p>
+              </div>
+              @if (selectedIds?.includes(barang.id)) {
+                <div class="w-fit">
+                  <span
+                    class="px-2.5 py-0.5 text-xs font-medium rounded border border-transparent dark:border-transparent inline-flex items-center status bg-green-100 text-green-500 dark:bg-green-500/20"
+                  >
+                    <lucide-angular name="pin" [class]="'size-3 mr-1.5'"></lucide-angular>
+                    Dipilih
+                  </span>
+                </div>
+              }
+              <div class="w-fit">
+                <button
+                  type="button"
+                  class="text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20 w-fit flex items-center gap-2"
+                  (click)="selectBarang(barang)"
+                >
+                  <lucide-angular name="circle-check" [class]="'inline-block size-4'"></lucide-angular>
+                  <span class="align-middle mt-0.5"> Pilih</span>
+                </button>
+              </div>
+            </div>
+          }
+        </div>
+      } @else if (isLoadingBarangs) {
+        <div class="grid w-full divide-y divide-gray-100 dark:divide-zink-500 mt-5">
+          @for (item of [1, 2, 3]; track $index) {
+            <div class="w-full flex items-center justify-between gap-4 py-4">
+              <div class="w-fit">
+                <div class="w-12 h-12 bg-skeleton aspect-square rounded-full"></div>
+              </div>
+              <div class="flex-1 flex flex-col gap-2">
+                <div class="w-48 max-w-full h-3 bg-skeleton rounded"></div>
+                <div class="w-36 max-w-full h-3 bg-skeleton rounded"></div>
+              </div>
+              <div class="w-fit">
+                <div class="h-9 w-20 bg-skeleton rounded-md"></div>
+              </div>
+            </div>
+          }
+        </div>
+      } @else if (!barangs.length && !isLoadingBarangs) {
+        <!-- no result -->
+        <div class="noresult">
+          <div class="h-56 grid place-items-center">
+            <div class="text-center">
+              <lucide-angular name="search" [class]="'size-6 mx-auto text-sky-500 fill-sky-100 dark:fill-sky-500/20'"></lucide-angular>
+              <p class="mt-2 mb-0 text-slate-500 dark:text-zink-200">
+                <span>No data found</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- ! no result -->
+      }
+    </div>
+  </div>
+</ng-modals>
+<!-- ! Approval Modal -->

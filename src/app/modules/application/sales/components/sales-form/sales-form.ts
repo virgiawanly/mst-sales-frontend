@@ -20,7 +20,7 @@ export class SalesForm extends FormGroup {
     const subtotalWithOngkir = subtotal + ongkir;
     const diskon = this.get('diskon')?.value;
 
-    if (diskon !== null && diskon < 1) {
+    if (diskon !== null && diskon < 0) {
       this.get('diskon')?.setValue(0, { emitEvent: false });
     }
 
@@ -51,7 +51,7 @@ export class SalesForm extends FormGroup {
   }
 
   calculateSubtotal() {
-    const subtotal = this.get('details')?.value.reduce((subtotal: number, detail: SalesDetailForm) => {
+    const subtotal = this.get('details')?.value?.reduce((subtotal: number, detail: SalesDetailForm) => {
       return (subtotal += Number(detail.get('total')?.value) ?? 0);
     }, 0);
 
@@ -63,8 +63,15 @@ export class SalesForm extends FormGroup {
     const diskon = Number(this.get('diskon')?.value) ?? 0;
     const ongkir = Number(this.get('ongkir')?.value) ?? 0;
     const subtotal = Number(this.get('subtotal')?.value) ?? 0;
+    const subtotalWithOngkir = subtotal + ongkir;
 
-    this.get('total_bayar')?.setValue(subtotal - diskon + ongkir);
+    let diskonToApply = diskon;
+    if (diskon > subtotalWithOngkir) {
+      diskonToApply = subtotalWithOngkir;
+      this.get('diskon')?.setValue(diskonToApply, { emitEvent: false });
+    }
+
+    this.get('total_bayar')?.setValue(subtotal - diskonToApply + ongkir);
   }
 }
 
@@ -111,7 +118,7 @@ export class SalesDetailForm extends FormGroup {
 
   calculate() {
     const qty = this.get('qty')?.value;
-    const harga = this.get('barang')?.value.harga;
+    const harga = this.get('barang')?.value?.harga;
     const diskonPercentage = this.get('diskon_pct')?.value;
     const diskonValue = (harga * diskonPercentage) / 100;
     const hargaDiskon = harga - diskonValue;

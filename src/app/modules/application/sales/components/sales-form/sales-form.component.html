@@ -103,6 +103,8 @@
                       <button
                         type="button"
                         class="px-2 py-1.5 text-xs text-indigo-500 bg-indigo-100 btn hover:text-white hover:bg-indigo-600 focus:text-white focus:bg-indigo-600 focus:ring focus:ring-indigo-100 active:text-white active:bg-indigo-600 active:ring active:ring-indigo-100 dark:bg-indigo-500/20 dark:text-indigo-500 dark:hover:bg-indigo-500 dark:hover:text-white dark:focus:bg-indigo-500 dark:focus:text-white dark:active:bg-indigo-500 dark:active:text-white dark:ring-indigo-400/20 product-removal"
+                        [appModalTrigger]="'change-barang-modal'"
+                        (click)="setDetailBarangToChange($index)"
                       >
                         <lucide-angular name="replace" [class]="'inline-block size-3 mr-1 align-middle'"></lucide-angular> <span class="align-middle"> Change</span>
                       </button>
@@ -127,6 +129,8 @@
                       placeholder="Input Qty"
                       formControlName="qty"
                       (ngModelChange)="detail.onChangeQty(); form.calculateSubtotal()"
+                      onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                      step="1"
                       min="1"
                     />
                   </td>
@@ -249,6 +253,10 @@
 <app-search-customer-modal [modalId]="'search-customer-modal'" [selectedId]="selectedCustomer?.id" (selected)="onCustomerSelected($event)"></app-search-customer-modal>
 <!-- ! Search Customer Modal -->
 
-<!-- Search Customer Modal -->
+<!-- Add barang Modal -->
 <app-search-barang-modal [modalId]="'add-barang-modal'" [selectedIds]="getSelectedBarangIds()" (selected)="addDetailsBarang($event)"></app-search-barang-modal>
-<!-- ! Search Customer Modal -->
+<!-- ! Add barang Modal -->
+
+<!-- Change barang Modal -->
+<app-search-barang-modal [modalId]="'change-barang-modal'" [selectedIds]="getSelectedBarangIds()" (selected)="changeDetailBarang($event)"></app-search-barang-modal>
+<!-- ! Change barang Modal -->

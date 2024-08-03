@@ -1,3 +1,4 @@
+import { Barang } from './barang';
 import { Customer } from './customers';
 
 export interface Sales {
@@ -13,7 +14,7 @@ export interface Sales {
   created_at?: string | null;
   updated_at?: string | null;
   deleted_at?: string | null;
-  detail: SalesDetail[];
+  details: SalesDetail[];
   customer?: Customer | null;
 }
 
@@ -27,6 +28,7 @@ export interface SalesDetail {
   diskon_nilai: number;
   harga_diskon: number;
   total: number;
+  barang?: Barang;
   created_at?: string | null;
   updated_at?: string | null;
   deleted_at?: string | null;

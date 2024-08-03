@@ -60,7 +60,7 @@ export class CustomerEditComponent {
         },
         error: (error: HttpFormattedErrorResponse) => {
           if (error.status !== 401) {
-            this._toastService.error(error.message, 'Failed to load item');
+            this._toastService.error(error.message, 'Failed to load data');
             this._router.navigateByUrl('/application/customer');
           }
         },

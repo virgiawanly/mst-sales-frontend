@@ -1,19 +1,19 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LucideAngularModule } from 'lucide-angular';
+import moment from 'moment';
+import { Barang } from '../../../../../../types/barang';
+import { Customer } from '../../../../../../types/customers';
 import { HttpFormattedErrorResponse } from '../../../../../../types/http';
 import { Sales } from '../../../../../../types/sales';
 import { HttpService } from '../../../../../core/services/http.service';
 import { ToastService } from '../../../../../core/services/toast.service';
 import { FlatpickrModule } from '../../../../../shared/components/flatpickr/flatpickr.module';
-import { SalesDetailForm, SalesForm } from './sales-form';
-import moment from 'moment';
-import { LucideAngularModule } from 'lucide-angular';
 import { MDModalModule } from '../../../../../shared/components/modals';
-import { SearchCustomerModalComponent } from '../search-customer-modal/search-customer-modal.component';
 import { SearchBarangModalComponent } from '../search-barang-modal/search-barang-modal.component';
-import { Customer } from '../../../../../../types/customers';
-import { Barang } from '../../../../../../types/barang';
-import { CommonModule } from '@angular/common';
+import { SearchCustomerModalComponent } from '../search-customer-modal/search-customer-modal.component';
+import { SalesDetailForm, SalesForm } from './sales-form';
 
 @Component({
   selector: 'app-sales-form',
@@ -31,7 +31,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './sales-form.component.html',
   styleUrl: './sales-form.component.scss',
 })
-export class SalesFormComponent implements OnInit {
+export class SalesFormComponent implements OnInit, OnChanges {
   @Input({ required: true }) form: SalesForm = new SalesForm();
   @Input({ required: false }) sales?: Sales | null;
   @Output() formSubmit: EventEmitter<SalesForm> = new EventEmitter<SalesForm>();
@@ -44,6 +44,8 @@ export class SalesFormComponent implements OnInit {
   subtotal: number = 0;
   grandTotal: number = 0;
 
+  detailIndexToChange: number | null = null;
+
   constructor(
     private _httpService: HttpService,
     private _toastService: ToastService,
@@ -53,9 +55,42 @@ export class SalesFormComponent implements OnInit {
     if (!this.sales) {
       this.getSalesCode();
       this.form.patchValue({ tgl: moment().format('YYYY-MM-DD HH:mm') });
-    } else {
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['sales'] && this.sales) {
+      const details: SalesDetailForm[] = this.sales.details?.map((detail) => {
+        const detailForm = new SalesDetailForm();
+
+        detailForm.patchValue({
+          barang: detail.barang ?? null,
+          barang_id: detail.barang_id,
+          qty: detail.qty,
+          diskon_pct: detail.diskon_pct,
+          diskon_nilai: detail.diskon_nilai,
+          harga_diskon: detail.harga_diskon,
+          total: detail.total,
+        });
+
+        return detailForm;
+      });
+
+      // First, update the details to get the subtotal
+      this.form.patchValue({ details: details });
+      this.form.calculateSubtotal();
+
+      // Second, update the header
+      this.form.patchValue({
+        tgl: moment(this.sales.tgl).format('YYYY-MM-DD HH:mm'),
+        cust_id: this.sales.cust_id,
+        ongkir: Number(this.sales.ongkir),
+        diskon: Number(this.sales.diskon),
+      });
+
+      // Third, update additional data to display
       this.salesCode = this.sales.kode;
-      this.form.patchValue({ tgl: this.sales.tgl });
+      this.selectedCustomer = this.sales.customer ?? null;
     }
   }
 
@@ -109,5 +144,30 @@ export class SalesFormComponent implements OnInit {
   removeDetailBarang(index: number) {
     this.form.controls['details'].value.splice(index, 1);
     this.form.calculateSubtotal();
+  }
+
+  setDetailBarangToChange(index: number) {
+    this.detailIndexToChange = index;
+  }
+
+  changeDetailBarang(barang: Barang) {
+    if (this.detailIndexToChange === null) {
+      return;
+    }
+
+    // Update selected item
+    this.form.controls['details'].value[this.detailIndexToChange].patchValue({
+      barang_id: barang.id,
+      barang: barang,
+    });
+
+    // Recalculate line total
+    this.form.controls['details'].value[this.detailIndexToChange].calculate();
+
+    // Recalculate all lines subtotal
+    this.form.calculateSubtotal();
+
+    // Reset index to change
+    this.detailIndexToChange = null;
   }
 }

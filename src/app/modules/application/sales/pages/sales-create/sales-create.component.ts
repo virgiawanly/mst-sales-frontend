@@ -33,7 +33,7 @@ export class SalesCreateComponent {
       return;
     }
 
-    const details = this.salesForm.get('details')?.value.map((detail: SalesDetailForm) => {
+    const details = this.salesForm.get('details')?.value?.map((detail: SalesDetailForm) => {
       return {
         barang_id: detail.get('barang_id')?.value ?? '',
         qty: detail.get('qty')?.value ?? 0,

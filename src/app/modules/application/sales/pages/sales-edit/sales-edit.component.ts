@@ -1,19 +1,19 @@
+import { CommonModule, Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { Sales } from '../../../../../../types/sales';
-import { SalesDetailForm, SalesForm } from '../../components/sales-form/sales-form';
-import { HttpService } from '../../../../../core/services/http.service';
-import { ToastService } from '../../../../../core/services/toast.service';
-import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpFormattedErrorResponse } from '../../../../../../types/http';
+import { Sales } from '../../../../../../types/sales';
+import { HttpService } from '../../../../../core/services/http.service';
+import { ToastService } from '../../../../../core/services/toast.service';
 import { PageTitleComponent } from '../../../../../shared/components/page-title/page-title.component';
+import { SalesDetailForm, SalesForm } from '../../components/sales-form/sales-form';
 import { SalesFormComponent } from '../../components/sales-form/sales-form.component';
-import moment from 'moment';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sales-edit',
   standalone: true,
-  imports: [PageTitleComponent, SalesFormComponent],
+  imports: [PageTitleComponent, SalesFormComponent, CommonModule, TranslateModule],
   templateUrl: './sales-edit.component.html',
   styleUrl: './sales-edit.component.scss',
 })
@@ -30,6 +30,7 @@ export class SalesEditComponent {
     private _location: Location,
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
+    private _translateService: TranslateService,
   ) {
     this.salesId = this._activatedRoute.snapshot.paramMap.get('id');
   }
@@ -54,7 +55,7 @@ export class SalesEditComponent {
         },
         error: (error: HttpFormattedErrorResponse) => {
           if (error.status !== 401) {
-            this._toastService.error(error.message, 'Failed to load data');
+            this._toastService.error(error.message, this._translateService.instant('failed-to-load-data'));
             this._router.navigateByUrl('/application/sales');
           }
         },
@@ -103,7 +104,7 @@ export class SalesEditComponent {
       })
       .subscribe({
         next: (res: any) => {
-          this._toastService.success(res.message, 'Success');
+          this._toastService.success(res.message, this._translateService.instant('success'));
           this._router.navigateByUrl('/application/sales');
         },
         error: (error: HttpFormattedErrorResponse) => {

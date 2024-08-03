@@ -1,6 +1,7 @@
-import { Location } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { HttpFormattedErrorResponse } from '../../../../../../types/http';
 import { HttpService } from '../../../../../core/services/http.service';
 import { ToastService } from '../../../../../core/services/toast.service';
@@ -11,7 +12,7 @@ import { SalesFormComponent } from '../../components/sales-form/sales-form.compo
 @Component({
   selector: 'app-sales-create',
   standalone: true,
-  imports: [PageTitleComponent, SalesFormComponent],
+  imports: [PageTitleComponent, SalesFormComponent, CommonModule, TranslateModule],
   templateUrl: './sales-create.component.html',
   styleUrl: './sales-create.component.scss',
 })

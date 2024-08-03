@@ -2,8 +2,10 @@ import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, Component, HostListener, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { TranslateModule } from '@ngx-translate/core';
 import { LUCIDE_ICONS, LucideAngularModule, LucideIconProvider, icons } from 'lucide-angular';
 import { SimplebarAngularModule } from 'simplebar-angular';
+import { LanguageService } from '../../../../core/services/language.service';
 import { CutomDropdownComponent } from '../../../../shared/components/customdropdown';
 import { getLayout, getSidebarsize } from '../../../../store/layout/layout.selectors';
 import { MENU } from './menu';
@@ -12,11 +14,11 @@ import { MenuItem } from './menu.model';
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [CommonModule, SimplebarAngularModule, CutomDropdownComponent, RouterModule, LucideAngularModule],
+  imports: [CommonModule, SimplebarAngularModule, CutomDropdownComponent, RouterModule, LucideAngularModule, TranslateModule],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [{ provide: LUCIDE_ICONS, multi: true, useValue: new LucideIconProvider(icons) }],
+  providers: [{ provide: LUCIDE_ICONS, multi: true, useValue: new LucideIconProvider(icons) }, LanguageService],
 })
 export class SidebarComponent {
   menuItems: any;

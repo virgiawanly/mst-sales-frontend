@@ -3,16 +3,16 @@
   <div class="grid grid-cols-1 gap-5 md:grid-cols-12 mb-8">
     <div class="md:col-span-6">
       <div class="mt-2 mb-4">
-        <h6 class="underline text-16">Sales Info:</h6>
+        <h6 class="underline text-16">{{ 'sales-info' | translate }}:</h6>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-12 gap-5 md:w-3/4 lg:w-1/2">
         <div class="md:col-span-12">
-          <label for="kode" class="inline-block mb-2 text-base font-medium">Kode <span class="text-red-500">*</span></label>
-          <input type="text" id="kode" class="form-input form-control" placeholder="Loading kode..." [value]="salesCode" readonly />
+          <label for="kode" class="inline-block mb-2 text-base font-medium">{{ 'code' | translate | titlecase }} <span class="text-red-500">*</span></label>
+          <input type="text" id="kode" class="form-input form-control" placeholder="Loading..." [value]="salesCode" readonly />
         </div>
         <!--end col-->
         <div class="md:col-span-12">
-          <label for="tgl" class="inline-block mb-2 text-base font-medium">Tanggal <span class="text-red-500">*</span></label>
+          <label for="tgl" class="inline-block mb-2 text-base font-medium">{{ 'date' | translate | titlecase }} <span class="text-red-500">*</span></label>
           <input
             type="text"
             id="tgl"
@@ -21,10 +21,10 @@
             [flatpickrOptions]="{ enableTime: true }"
             class="form-input form-control"
             readonly="readonly"
-            placeholder="Select start date"
+            [placeholder]="('select' | translate) + ' ' + ('date' | translate)"
           />
           @if (form.get('tgl')?.hasError('required') && form.get('tgl')?.touched) {
-            <div class="mt-1 text-red-500 text-sm">Tanggal is required</div>
+            <div class="mt-1 text-red-500 text-sm">{{ 'date' | translate | titlecase }} {{ 'is-required' | translate }}</div>
           }
         </div>
         <!-- end col -->
@@ -33,24 +33,24 @@
     <!-- end col -->
     <div class="md:col-span-6">
       <div class="mt-2 mb-4">
-        <h6 class="underline text-16">Customer Info:</h6>
+        <h6 class="underline text-16">{{ 'customer-info' | translate }}:</h6>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-12 gap-5 md:w-3/4 lg:w-1/2 mb-5">
         <div class="md:col-span-12">
-          <label for="customer-code" class="inline-block mb-2 text-base font-medium">Kode <span class="text-red-500">*</span></label>
+          <label for="customer-code" class="inline-block mb-2 text-base font-medium">{{ 'code' | translate | titlecase }} <span class="text-red-500">*</span></label>
           <div class="flex items-center gap-3">
-            <input type="text" id="customer-code" class="form-input form-control" placeholder="Pilih customer..." [value]="selectedCustomer?.kode || ''" readonly />
+            <input type="text" id="customer-code" class="form-input form-control" [placeholder]="('select-customer' | translate | titlecase) + '...'" [value]="selectedCustomer?.kode || ''" readonly />
             <button
               type="button"
               class="text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20 w-fit flex items-center gap-2"
               [appModalTrigger]="'search-customer-modal'"
             >
               <lucide-angular name="search" [class]="'inline-block size-4'"></lucide-angular>
-              <span class="align-middle"> Pilih</span>
+              <span class="align-middle"> {{ 'select' | translate }}</span>
             </button>
           </div>
           @if (form.get('cust_id')?.hasError('required') && form.get('cust_id')?.touched) {
-            <div class="mt-1 text-red-500 text-sm">Customer is required</div>
+            <div class="mt-1 text-red-500 text-sm">{{ 'Customer' | translate }} {{ 'is-required' | translate }}</div>
           }
         </div>
         <!--end col-->
@@ -58,12 +58,12 @@
       @if (selectedCustomer) {
         <div class="flex flex-col sm:flex-row items-start gap-5 md:w-full">
           <div class="flex-1">
-            <label for="tgl" class="inline-block mb-2 text-base font-medium underline">Nama:</label>
+            <label for="nama" class="inline-block mb-2 text-base font-medium underline">{{ 'name' | translate | titlecase }}:</label>
             <p>{{ selectedCustomer.nama }}</p>
           </div>
           <!-- end col -->
           <div class="flex-1">
-            <label for="tgl" class="inline-block mb-2 text-base font-medium underline">Telp:</label>
+            <label for="telp" class="inline-block mb-2 text-base font-medium underline">{{ 'phone' | translate | titlecase }}:</label>
             <p>{{ selectedCustomer.telp }}</p>
           </div>
           <!-- end col -->
@@ -74,7 +74,7 @@
   </div>
   <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
     <div class="md:col-span-12">
-      <h6 class="my-1 underline text-16">Sales Items:</h6>
+      <h6 class="my-1 underline text-16">{{ 'sales-items' | translate }}:</h6>
     </div>
     <!--end col-->
     <div class="md:col-span-12">
@@ -82,15 +82,23 @@
         <table class="w-full min-w-fit">
           <thead>
             <tr>
-              <th class="px-3.5 py-2.5 font-medium text-sm text-slate-500 uppercase border border-slate-200 dark:text-zink-200 dark:border-zink-500 w-52 min-w-fit">Opsi</th>
+              <th class="px-3.5 py-2.5 font-medium text-sm text-slate-500 uppercase border border-slate-200 dark:text-zink-200 dark:border-zink-500 w-52 min-w-fit">{{ 'options' | translate }}</th>
               <th class="px-3.5 py-2.5 font-medium text-sm text-slate-500 uppercase border border-slate-200 dark:text-zink-200 dark:border-zink-500 w-12 min-w-fit">#</th>
-              <th class="px-3.5 py-2.5 font-medium text-sm text-slate-500 uppercase border border-slate-200 dark:text-zink-200 dark:border-zink-500 w-36 min-w-fit">Kode Barang</th>
-              <th class="px-3.5 py-2.5 font-medium text-sm text-slate-500 uppercase border border-slate-200 dark:text-zink-200 dark:border-zink-500 w-auto min-w-48">Nama Barang</th>
+              <th class="px-3.5 py-2.5 font-medium text-sm text-slate-500 uppercase border border-slate-200 dark:text-zink-200 dark:border-zink-500 w-36 min-w-fit">{{ 'item-code' | translate }}</th>
+              <th class="px-3.5 py-2.5 font-medium text-sm text-slate-500 uppercase border border-slate-200 dark:text-zink-200 dark:border-zink-500 w-auto min-w-48">{{ 'item-name' | translate }}</th>
               <th class="px-3.5 py-2.5 font-medium text-sm text-slate-500 uppercase border border-slate-200 dark:text-zink-200 dark:border-zink-500 w-44 min-w-fit">Qty</th>
-              <th class="px-3.5 py-2.5 font-medium text-sm text-slate-500 uppercase border border-slate-200 dark:text-zink-200 dark:border-zink-500 w-48 min-w-fit">Harga Bandrol (Rp)</th>
-              <th class="px-3.5 py-2.5 font-medium text-sm text-slate-500 uppercase border border-slate-200 dark:text-zink-200 dark:border-zink-500 w-44 min-w-fit">Diskon (%)</th>
-              <th class="px-3.5 py-2.5 font-medium text-sm text-slate-500 uppercase border border-slate-200 dark:text-zink-200 dark:border-zink-500 w-48 min-w-fit">Diskon (Rp)</th>
-              <th class="px-3.5 py-2.5 font-medium text-sm text-slate-500 uppercase border border-slate-200 dark:text-zink-200 dark:border-zink-500 w-48 min-w-fit">Harga Diskon (Rp)</th>
+              <th class="px-3.5 py-2.5 font-medium text-sm text-slate-500 uppercase border border-slate-200 dark:text-zink-200 dark:border-zink-500 w-48 min-w-fit">
+                {{ 'label-price' | translate }} (Rp)
+              </th>
+              <th class="px-3.5 py-2.5 font-medium text-sm text-slate-500 uppercase border border-slate-200 dark:text-zink-200 dark:border-zink-500 w-44 min-w-fit">
+                {{ 'discount' | translate }} (%)
+              </th>
+              <th class="px-3.5 py-2.5 font-medium text-sm text-slate-500 uppercase border border-slate-200 dark:text-zink-200 dark:border-zink-500 w-48 min-w-fit">
+                {{ 'discount' | translate }} (Rp)
+              </th>
+              <th class="px-3.5 py-2.5 font-medium text-sm text-slate-500 uppercase border border-slate-200 dark:text-zink-200 dark:border-zink-500 w-48 min-w-fit">
+                {{ 'discounted-price' | translate }} (Rp)
+              </th>
               <th class="px-3.5 py-2.5 font-medium text-sm text-slate-500 uppercase border border-slate-200 dark:text-zink-200 dark:border-zink-500 w-48 min-w-fit">Total (Rp)</th>
             </tr>
           </thead>
@@ -106,14 +114,14 @@
                         [appModalTrigger]="'change-barang-modal'"
                         (click)="setDetailBarangToChange($index)"
                       >
-                        <lucide-angular name="replace" [class]="'inline-block size-3 mr-1 align-middle'"></lucide-angular> <span class="align-middle"> Change</span>
+                        <lucide-angular name="replace" [class]="'inline-block size-3 mr-1 align-middle'"></lucide-angular> <span class="align-middle"> {{ 'change' | translate }}</span>
                       </button>
                       <button
                         type="button"
                         class="px-2 py-1.5 text-xs text-red-500 bg-red-100 btn hover:text-white hover:bg-red-600 focus:text-white focus:bg-red-600 focus:ring focus:ring-red-100 active:text-white active:bg-red-600 active:ring active:ring-red-100 dark:bg-red-500/20 dark:text-red-500 dark:hover:bg-red-500 dark:hover:text-white dark:focus:bg-red-500 dark:focus:text-white dark:active:bg-red-500 dark:active:text-white dark:ring-red-400/20 product-removal"
                         (click)="removeDetailBarang($index)"
                       >
-                        <lucide-angular name="trash-2" [class]="'inline-block size-3 mr-1 align-middle'"></lucide-angular> <span class="align-middle"> Delete</span>
+                        <lucide-angular name="trash-2" [class]="'inline-block size-3 mr-1 align-middle'"></lucide-angular> <span class="align-middle"> {{ 'delete' | translate }}</span>
                       </button>
                     </div>
                   </td>
@@ -169,7 +177,7 @@
                   <div
                     class="flex gap-1 items-center justify-center px-4 py-3 text-sm border rounded-md text-slate-500 border-slate-200 bg-slate-50 dark:bg-zink-500/30 dark:border-zink-500 dark:text-zink-200"
                   >
-                    <lucide-angular name="circle-alert" [class]="'h-4'"></lucide-angular> Belum ada item ditambahkan.
+                    <lucide-angular name="circle-alert" [class]="'h-4'"></lucide-angular> {{ 'no-items-added' | translate }}.
                   </div>
                 </td>
               </tr>
@@ -185,7 +193,7 @@
         [appModalTrigger]="'add-barang-modal'"
         class="w-full bg-white border-dashed text-custom-500 btn border-custom-500 hover:text-custom-500 hover:bg-custom-50 hover:border-custom-600 focus:text-custom-600 focus:bg-custom-50 focus:border-custom-600 active:text-custom-600 active:bg-custom-50 active:border-custom-600 dark:bg-zink-700 dark:ring-custom-400/20 dark:hover:bg-custom-800/20 dark:focus:bg-custom-800/20 dark:active:bg-custom-800/20"
       >
-        <lucide-angular name="plus" [class]="'inline-block size-3 mr-1 align-middle'"></lucide-angular> <span class="align-middle"> Add Item</span>
+        <lucide-angular name="plus" [class]="'inline-block size-3 mr-1 align-middle'"></lucide-angular> <span class="align-middle"> {{ 'add-item' | translate | titlecase }}</span>
       </button>
     </div>
     <!-- end col -->
@@ -202,7 +210,7 @@
           </div>
           <div class="flex items-center justify-between border-b border-slate-200 dark:border-zink-500 h-14">
             <div class="flex-1">
-              <label class="text-slate-500 dark:text-zink-200 font-medium" for="diskon">Diskon (Rp)</label>
+              <label class="text-slate-500 dark:text-zink-200 font-medium" for="diskon">{{ 'discount' | translate | titlecase }} (Rp)</label>
             </div>
             <div class="flex-1">
               <input
@@ -210,7 +218,7 @@
                 name="diskon"
                 id="diskon"
                 class="w-full min-w-28 px-3 py-2 text-sm form-input form-control"
-                placeholder="Input Diskon"
+                [placeholder]="'Input' + ' ' + ('discount' | translate | titlecase)"
                 formControlName="diskon"
                 (ngModelChange)="form.onChangeDiskon()"
                 min="0"
@@ -219,7 +227,7 @@
           </div>
           <div class="flex items-center justify-between border-b border-slate-200 dark:border-zink-500 h-14">
             <div class="flex-1">
-              <label class="text-slate-500 dark:text-zink-200 font-medium" for="ongkir">Ongkir (Rp)</label>
+              <label class="text-slate-500 dark:text-zink-200 font-medium" for="ongkir">{{ 'shipping-cost' | translate | titlecase }} (Rp)</label>
             </div>
             <div class="flex-1">
               <input
@@ -227,7 +235,7 @@
                 name="ongkir"
                 id="ongkir"
                 class="w-full min-w-28 px-3 py-2 text-sm form-input form-control"
-                placeholder="Input Ongkir"
+                [placeholder]="'Input' + ' ' + ('shipping-cost' | translate | titlecase)"
                 formControlName="ongkir"
                 (ngModelChange)="form.onChangeOngkir()"
                 min="0"
@@ -236,7 +244,7 @@
           </div>
           <div class="flex items-center justify-between border-b border-slate-200 dark:border-zink-500 h-14">
             <div class="flex-1">
-              <label class="text-slate-500 dark:text-zink-200 font-medium">Total Bayar (Rp)</label>
+              <label class="text-slate-500 dark:text-zink-200 font-medium">{{ 'total-payment' | translate | titlecase }} (Rp)</label>
             </div>
             <div class="flex-1">
               <h6>{{ form.get('total_bayar')?.value | number: '1.2-2' }}</h6>

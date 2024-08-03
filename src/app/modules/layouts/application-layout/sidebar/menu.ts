@@ -3,24 +3,24 @@ import { MenuItem } from './menu.model';
 export const MENU: MenuItem[] = [
   {
     id: 0,
-    label: 'Transaksi',
+    label: 'transaction',
     isTitle: true,
   },
   {
     id: 1,
-    label: 'Sales',
+    label: 'sales',
     icon: 'baggage-claim',
     link: '#',
     subItems: [
       {
         id: 1.1,
-        label: 'Sales List',
+        label: 'sales-list',
         link: '/application/sales',
         parentId: 1,
       },
       {
         id: 1.2,
-        label: 'New Sales',
+        label: 'add-sales',
         link: '/application/sales/create',
         parentId: 1,
       },
@@ -28,18 +28,18 @@ export const MENU: MenuItem[] = [
   },
   {
     id: 2,
-    label: 'Master Data',
+    label: 'master-data',
     isTitle: true,
   },
   {
     id: 3,
-    label: 'Barang',
+    label: 'items',
     icon: 'package',
     link: '/application/barang',
   },
   {
     id: 4,
-    label: 'Customer',
+    label: 'customers',
     icon: 'users',
     link: '/application/customer',
   },

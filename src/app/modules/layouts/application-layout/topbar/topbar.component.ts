@@ -13,7 +13,6 @@ import { changeMode, changesidebarcolor, changesidebarsize, changetopbarcolor } 
 import { getLayout, getLayoutmode, getSidebarcolor, getSidebarsize, getTopbarcolor } from '../../../../store/layout/layout.selectors';
 import { getUser } from '../../../../store/user/user.selectors';
 import { LanguageService } from '../../../../core/services/language.service';
-import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-topbar',
@@ -44,7 +43,6 @@ export class TopbarComponent {
     @Inject(DOCUMENT) private document: Document,
     private _authService: AuthService,
     private _router: Router,
-    private _cookiesService: CookieService,
     public languageService: LanguageService,
   ) {}
 
@@ -73,7 +71,7 @@ export class TopbarComponent {
       this.user = user;
     });
 
-    this.cookieLang = this._cookiesService.get('lang');
+    this.cookieLang = localStorage.getItem('mstSalesAdmin@lang') ?? 'en';
     const val = this.languages.filter((x) => x.lang === this.cookieLang);
     if (val.length === 0) {
       if (this.languageFlag === undefined) {
@@ -172,7 +170,7 @@ export class TopbarComponent {
   setLanguage(text: string, lang: string, flag: string) {
     this.languageFlag = flag;
     this.cookieLang = lang;
-    this._cookiesService.set('lang', lang, { expires: 1, sameSite: 'Lax' });
     this.languageService.setLanguage(lang);
+    localStorage.setItem('mstSalesAdmin@lang', lang);
   }
 }

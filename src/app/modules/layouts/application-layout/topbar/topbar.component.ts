@@ -13,7 +13,7 @@ import { changeMode, changesidebarcolor, changesidebarsize, changetopbarcolor } 
 import { getLayout, getLayoutmode, getSidebarcolor, getSidebarsize, getTopbarcolor } from '../../../../store/layout/layout.selectors';
 import { getUser } from '../../../../store/user/user.selectors';
 import { LanguageService } from '../../../../core/services/language.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-topbar',
@@ -54,6 +54,7 @@ export class TopbarComponent {
     private _authService: AuthService,
     private _router: Router,
     public languageService: LanguageService,
+    private _translateService: TranslateService,
   ) {}
 
   @HostListener('window:resize', ['$event'])
@@ -81,7 +82,7 @@ export class TopbarComponent {
       this.user = user;
     });
 
-    this.cookieLang = localStorage.getItem('mstSalesAdmin@lang') ?? 'en';
+    this.cookieLang = localStorage.getItem('mstSalesAdmin@lang') ?? this._translateService.getBrowserLang() ?? 'en';
     const val = this.languages.filter((x) => x.lang === this.cookieLang);
     if (val.length === 0) {
       if (this.languageFlag === undefined) {

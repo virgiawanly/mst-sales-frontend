@@ -1,4 +1,6 @@
 {
+  "dashboard": "Dashboard",
+  "welcome": "Selamat Datang",
   "sales": "Penjualan",
   "sales-list": "List Penjualan",
   "sales-info": "Info Penjualan",
@@ -8,9 +10,11 @@
   "view-sales": "Detail Penjualan",
   "delete-sales": "Hapus Penjualan",
   "sales-form": "Form Penjualan",
+  "sales-detail": "Detail Penjualan",
   "details": "Detail",
   "sales-details": "Detail Penjualan",
   "sales-items": "Barang",
+  "item": "Barang",
   "items": "Barang",
   "item-list": "List Barang",
   "add-item": "Tambah Barang",
@@ -23,6 +27,7 @@
   "item-code": "Kode Barang",
   "customers": "Customers",
   "customer-list": "List Customer",
+  "customer-details": "Detail Customer",
   "customer-info": "Info Customer",
   "customer-code": "Kode Customer",
   "customer-name": "Nama Customer",
@@ -41,6 +46,7 @@
   "change": "Ubah",
   "transaction": "Transaksi",
   "transaction-number": "No Transaksi",
+  "transaction-date": "Tanggal Transaksi",
   "master-data": "Data Master",
   "code": "Kode",
   "date": "Tanggal",
@@ -49,6 +55,8 @@
   "discount": "Diskon",
   "discounted-price": "Harga Diskon",
   "shipping-cost": "Ongkir",
+  "qty": "Qty",
+  "total": "Total",
   "total-payment": "Total Bayar",
   "is-required": "harus diisi",
   "must-be-greater-than": "harus lebih dari",
@@ -83,5 +91,6 @@
   "sign-out": "Sign Out",
   "logout": "Logout",
   "logout-confirmation": "Konfirmasi Logout",
-  "are-you-sure-want-to-logout?": "Anda yakin ingin keluar?"
+  "are-you-sure-want-to-logout?": "Anda yakin ingin keluar?",
+  "created-at": "Dibuat pada"
 }

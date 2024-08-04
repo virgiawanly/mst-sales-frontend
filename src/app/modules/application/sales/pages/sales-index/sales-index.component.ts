@@ -15,6 +15,7 @@ import { MnDropdownComponent } from '../../../../../shared/components/dropdown';
 import { MDModalModule } from '../../../../../shared/components/modals';
 import { PageTitleComponent } from '../../../../../shared/components/page-title/page-title.component';
 import { NGXPagination } from '../../../../../shared/components/pagination';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sales-index',
@@ -30,6 +31,7 @@ import { NGXPagination } from '../../../../../shared/components/pagination';
     CommonModule,
     FormsModule,
     RouterLink,
+    TranslateModule,
   ],
   templateUrl: './sales-index.component.html',
   styleUrl: './sales-index.component.scss',
@@ -57,21 +59,22 @@ export class SalesIndexComponent {
   };
 
   columns: TableColumn[] = [
-    { name: 'No', prop: 'id', width: 50, resizeable: true, sortable: true },
-    { name: 'No Transaksi', prop: 'kode', width: 150, resizeable: true },
-    { name: 'Tanggal', prop: 'tgl', width: 150, resizeable: true, sortable: true },
-    { name: 'Nama Customer', prop: 'customer', width: 200, resizeable: true },
-    { name: 'Jumlah Barang', prop: 'details_count', width: 120, resizeable: true, sortable: true },
-    { name: 'Sub Total', prop: 'subtotal', width: 150, resizeable: true, sortable: true },
-    { name: 'Diskon', prop: 'diskon', width: 150, resizeable: true, sortable: true },
-    { name: 'Ongkir', prop: 'ongkir', width: 150, resizeable: true, sortable: true },
-    { name: 'Total', prop: 'total_bayar', width: 150, resizeable: true, sortable: true },
-    { name: 'Action', prop: 'actions', width: 150, resizeable: true, sortable: false },
+    { name: 'no', prop: 'id', width: 50, resizeable: true, sortable: true },
+    { name: 'transaction-number', prop: 'kode', width: 150, resizeable: true },
+    { name: 'date', prop: 'tgl', width: 150, resizeable: true, sortable: true },
+    { name: 'customer-name', prop: 'customer', width: 200, resizeable: true },
+    { name: 'items-count', prop: 'details_count', width: 120, resizeable: true, sortable: true },
+    { name: 'sub-total', prop: 'subtotal', width: 150, resizeable: true, sortable: true },
+    { name: 'discount', prop: 'diskon', width: 150, resizeable: true, sortable: true },
+    { name: 'shipping-cost', prop: 'ongkir', width: 150, resizeable: true, sortable: true },
+    { name: 'total', prop: 'total_bayar', width: 150, resizeable: true, sortable: true },
+    { name: 'options', prop: 'actions', width: 150, resizeable: true, sortable: false },
   ];
 
   constructor(
     private _httpService: HttpService,
     private _toastService: ToastService,
+    private _translateService: TranslateService,
   ) {}
 
   ngOnInit() {
@@ -129,16 +132,16 @@ export class SalesIndexComponent {
 
     this.isDeletingSales = true;
     this._httpService
-      .delete(`web/sales/${this.salesToDelete?.id}`, { headers: { 'Location-Id': 1 } })
+      .delete(`web/sales/${this.salesToDelete?.id}`)
       .subscribe({
         next: (res: any) => {
-          this._toastService.success(res.message, 'Success');
+          this._toastService.success(res.message, this._translateService.instant('success'));
           this.salesPagination.page = 1;
           this.getSales();
         },
         error: (error: HttpFormattedErrorResponse) => {
           if (error.status !== 401) {
-            this._toastService.error(error.message);
+            this._toastService.error(error.message, this._translateService.instant('failed'));
           }
         },
       })

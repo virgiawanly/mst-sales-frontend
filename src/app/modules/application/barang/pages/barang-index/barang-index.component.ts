@@ -15,6 +15,7 @@ import { MnDropdownComponent } from '../../../../../shared/components/dropdown';
 import { MDModalModule } from '../../../../../shared/components/modals';
 import { PageTitleComponent } from '../../../../../shared/components/page-title/page-title.component';
 import { NGXPagination } from '../../../../../shared/components/pagination';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-barang-index',
@@ -30,6 +31,7 @@ import { NGXPagination } from '../../../../../shared/components/pagination';
     CommonModule,
     FormsModule,
     RouterLink,
+    TranslateModule,
   ],
   templateUrl: './barang-index.component.html',
   styleUrl: './barang-index.component.scss',
@@ -57,15 +59,16 @@ export class BarangIndexComponent {
   };
 
   columns: TableColumn[] = [
-    { name: 'Kode Barang', prop: 'kode', width: 150, resizeable: true },
-    { name: 'Nama Barang', prop: 'nama', width: 200, resizeable: true },
-    { name: 'Harga', prop: 'harga', width: 150, resizeable: true },
-    { name: 'Action', prop: 'actions', width: 150, resizeable: true, sortable: false },
+    { name: 'item-code', prop: 'kode', width: 150, resizeable: true },
+    { name: 'item-name', prop: 'nama', width: 200, resizeable: true },
+    { name: 'price', prop: 'harga', width: 150, resizeable: true },
+    { name: 'options', prop: 'actions', width: 150, resizeable: true, sortable: false },
   ];
 
   constructor(
     private _httpService: HttpService,
     private _toastService: ToastService,
+    private _translateService: TranslateService,
   ) {}
 
   ngOnInit() {
@@ -103,7 +106,7 @@ export class BarangIndexComponent {
         },
         error: (error: HttpFormattedErrorResponse) => {
           if (error.status !== 401) {
-            this._toastService.error(error.message);
+            this._toastService.error(error.message, this._translateService.instant('failed'));
           }
         },
       })
@@ -123,16 +126,16 @@ export class BarangIndexComponent {
 
     this.isDeletingBarang = true;
     this._httpService
-      .delete(`web/barang/${this.barangToDelete?.id}`, { headers: { 'Location-Id': 1 } })
+      .delete(`web/barang/${this.barangToDelete?.id}`)
       .subscribe({
         next: (res: any) => {
-          this._toastService.success(res.message, 'Success');
+          this._toastService.success(res.message, this._translateService.instant('success'));
           this.barangPagination.page = 1;
           this.getBarang();
         },
         error: (error: HttpFormattedErrorResponse) => {
           if (error.status !== 401) {
-            this._toastService.error(error.message);
+            this._toastService.error(error.message, this._translateService.instant('failed'));
           }
         },
       })

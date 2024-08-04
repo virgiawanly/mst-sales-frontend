@@ -1,6 +1,7 @@
-import { Location } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { HttpFormattedErrorResponse } from '../../../../../../types/http';
 import { HttpService } from '../../../../../core/services/http.service';
 import { ToastService } from '../../../../../core/services/toast.service';
@@ -11,7 +12,7 @@ import { SalesFormComponent } from '../../components/sales-form/sales-form.compo
 @Component({
   selector: 'app-sales-create',
   standalone: true,
-  imports: [PageTitleComponent, SalesFormComponent],
+  imports: [PageTitleComponent, SalesFormComponent, CommonModule, TranslateModule],
   templateUrl: './sales-create.component.html',
   styleUrl: './sales-create.component.scss',
 })
@@ -24,6 +25,7 @@ export class SalesCreateComponent {
     private _toastService: ToastService,
     private _location: Location,
     private _router: Router,
+    private _translateService: TranslateService,
   ) {}
 
   submit() {
@@ -42,7 +44,7 @@ export class SalesCreateComponent {
     });
 
     if (details.length === 0) {
-      this._toastService.error('Please add at least 1 detail item', 'Failed');
+      this._toastService.error(this._translateService.instant('please-add-at-least-one-item'), this._translateService.instant('failed'));
       return;
     }
 
@@ -60,12 +62,12 @@ export class SalesCreateComponent {
       .post('web/sales', payload)
       .subscribe({
         next: (res: any) => {
-          this._toastService.success(res.message, 'Success');
+          this._toastService.success(res.message, this._translateService.instant('success'));
           this._router.navigateByUrl('/application/sales');
         },
         error: (error: HttpFormattedErrorResponse) => {
           if (error.status !== 401) {
-            this._toastService.error(error.message, 'Failed');
+            this._toastService.error(error.message, this._translateService.instant('failed'));
           }
         },
       })

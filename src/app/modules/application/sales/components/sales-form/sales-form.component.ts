@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 import { LucideAngularModule } from 'lucide-angular';
 import moment from 'moment';
 import { Barang } from '../../../../../../types/barang';
@@ -27,6 +28,7 @@ import { SalesDetailForm, SalesForm } from './sales-form';
     MDModalModule,
     SearchCustomerModalComponent,
     SearchBarangModalComponent,
+    TranslateModule,
   ],
   templateUrl: './sales-form.component.html',
   styleUrl: './sales-form.component.scss',

@@ -12,6 +12,7 @@ import { FooterComponent } from './footer/footer.component';
 import { LoadingScreenComponent } from './loading-screen/loading-screen.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { TopbarComponent } from './topbar/topbar.component';
+import { LanguageService } from '../../../core/services/language.service';
 
 @Component({
   selector: 'app-application-layout',
@@ -19,6 +20,7 @@ import { TopbarComponent } from './topbar/topbar.component';
   imports: [CommonModule, SidebarComponent, TopbarComponent, RouterModule, CustomizerComponent, FooterComponent, LoadingScreenComponent],
   templateUrl: './application-layout.component.html',
   styleUrl: './application-layout.component.scss',
+  providers: [LanguageService],
 })
 export class ApplicationLayoutComponent {
   private _unsubscribe$: Subject<void> = new Subject();
@@ -56,7 +58,7 @@ export class ApplicationLayoutComponent {
     this._store.dispatch(fetchUser());
 
     // Uncomment this to use local storage user
-    // const userProfile = localStorage.getItem('mstsalesAdmin@userProfile');
+    // const userProfile = localStorage.getItem('mstSalesAdmin@userProfile');
     // if (userProfile) {
     //   this._store.dispatch(setUser({ user: JSON.parse(userProfile ?? '{}') }));
     // } else {

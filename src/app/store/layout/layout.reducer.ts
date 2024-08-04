@@ -51,52 +51,52 @@ export const layoutReducer = createReducer(
   initialState,
 
   on(loadSavedLayoutState, (state) => {
-    const savedLayoutState = JSON.parse(localStorage.getItem('mstsalesAdmin@layoutState') ?? '{}');
+    const savedLayoutState = JSON.parse(localStorage.getItem('mstSalesAdmin@layoutState') ?? '{}');
     return { ...state, ...savedLayoutState };
   }),
 
   on(changelayout, (state, action) => {
-    localStorage.setItem('mstsalesAdmin@layoutState', JSON.stringify({ ...state, LAYOUT: action.layout }));
+    localStorage.setItem('mstSalesAdmin@layoutState', JSON.stringify({ ...state, LAYOUT: action.layout }));
     return { ...state, LAYOUT: action.layout };
   }),
 
   on(changeSkin, (state, action) => {
-    localStorage.setItem('mstsalesAdmin@layoutState', JSON.stringify({ ...state, LAYOUT_SKIN: action.skin }));
+    localStorage.setItem('mstSalesAdmin@layoutState', JSON.stringify({ ...state, LAYOUT_SKIN: action.skin }));
     return { ...state, LAYOUT_SKIN: action.skin };
   }),
 
   on(changeDirection, (state, action) => {
-    localStorage.setItem('mstsalesAdmin@layoutState', JSON.stringify({ ...state, LAYOUT_DIRECTION: action.dir }));
+    localStorage.setItem('mstSalesAdmin@layoutState', JSON.stringify({ ...state, LAYOUT_DIRECTION: action.dir }));
     return { ...state, LAYOUT_DIRECTION: action.dir };
   }),
 
   on(changewidthLayout, (state, action) => {
-    localStorage.setItem('mstsalesAdmin@layoutState', JSON.stringify({ ...state, LAYOUT_WIDTH: action.width }));
+    localStorage.setItem('mstSalesAdmin@layoutState', JSON.stringify({ ...state, LAYOUT_WIDTH: action.width }));
     return { ...state, LAYOUT_WIDTH: action.width };
   }),
 
   on(changesidebarsize, (state, action) => {
-    localStorage.setItem('mstsalesAdmin@layoutState', JSON.stringify({ ...state, SIDEBAR_SIZE: action.size }));
+    localStorage.setItem('mstSalesAdmin@layoutState', JSON.stringify({ ...state, SIDEBAR_SIZE: action.size }));
     return { ...state, SIDEBAR_SIZE: action.size };
   }),
 
   on(changenavigation, (state, action) => {
-    localStorage.setItem('mstsalesAdmin@layoutState', JSON.stringify({ ...state, LAYOUT_NAVIGATION: action.navigation }));
+    localStorage.setItem('mstSalesAdmin@layoutState', JSON.stringify({ ...state, LAYOUT_NAVIGATION: action.navigation }));
     return { ...state, LAYOUT_NAVIGATION: action.navigation };
   }),
 
   on(changesidebarcolor, (state, action) => {
-    localStorage.setItem('mstsalesAdmin@layoutState', JSON.stringify({ ...state, SIDEBAR_COLOR: action.sidebar }));
+    localStorage.setItem('mstSalesAdmin@layoutState', JSON.stringify({ ...state, SIDEBAR_COLOR: action.sidebar }));
     return { ...state, SIDEBAR_COLOR: action.sidebar };
   }),
 
   on(changetopbarcolor, (state, action) => {
-    localStorage.setItem('mstsalesAdmin@layoutState', JSON.stringify({ ...state, TOPBAR_COLOR: action.topbar }));
+    localStorage.setItem('mstSalesAdmin@layoutState', JSON.stringify({ ...state, TOPBAR_COLOR: action.topbar }));
     return { ...state, TOPBAR_COLOR: action.topbar };
   }),
 
   on(changeMode, (state, action) => {
-    localStorage.setItem('mstsalesAdmin@layoutState', JSON.stringify({ ...state, LAYOUT_MODE: action.mode }));
+    localStorage.setItem('mstSalesAdmin@layoutState', JSON.stringify({ ...state, LAYOUT_MODE: action.mode }));
     return { ...state, LAYOUT_MODE: action.mode };
   }),
 );

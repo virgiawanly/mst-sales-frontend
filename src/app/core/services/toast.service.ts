@@ -24,7 +24,7 @@ export class ToastService {
    * @return Promise<HTMLIonToastElement>
    */
   success(message: string, title?: string, config?: Partial<Partial<IndividualConfig<any>>>) {
-    return this._toastrService.success(message, title ?? '', {
+    return this._toastrService.success(this.capitalize(message), title ?? '', {
       ...this._defaultConfig,
       ...config,
     });
@@ -39,7 +39,7 @@ export class ToastService {
    * @return Promise<HTMLIonToastElement>
    */
   error(message: string, title?: string, config?: Partial<Partial<IndividualConfig<any>>>) {
-    return this._toastrService.error(message, title ?? '', {
+    return this._toastrService.error(this.capitalize(message), title ?? '', {
       ...this._defaultConfig,
       ...config,
     });
@@ -54,7 +54,7 @@ export class ToastService {
    * @return Promise<HTMLIonToastElement>
    */
   info(message: string, title?: string, config?: Partial<Partial<IndividualConfig<any>>>) {
-    return this._toastrService.info(message, title ?? '', {
+    return this._toastrService.info(this.capitalize(message), title ?? '', {
       ...this._defaultConfig,
       ...config,
     });
@@ -69,7 +69,7 @@ export class ToastService {
    * @return Promise<HTMLIonToastElement>
    */
   warning(message: string, title?: string, config?: Partial<Partial<IndividualConfig<any>>>) {
-    return this._toastrService.warning(message, title ?? '', {
+    return this._toastrService.warning(this.capitalize(message), title ?? '', {
       ...this._defaultConfig,
       ...config,
     });
@@ -84,9 +84,19 @@ export class ToastService {
    * @return Promise<HTMLIonToastElement>
    */
   create(message: string, title?: string, config?: Partial<Partial<IndividualConfig<any>>>) {
-    return this._toastrService.show(message, title ?? '', {
+    return this._toastrService.show(this.capitalize(message), title ?? '', {
       ...this._defaultConfig,
       ...config,
     });
+  }
+
+  /**
+   * Capitalize the first letter of a string
+   *
+   * @param str
+   * @return string
+   */
+  capitalize(str: string) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
   }
 }

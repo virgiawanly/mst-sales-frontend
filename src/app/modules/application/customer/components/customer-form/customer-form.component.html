@@ -1,0 +1,35 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <button type="submit" class="hidden"></button>
+  <div class="grid grid-cols-1 gap-5 lg:grid-cols-2 xl:grid-cols-12">
+    <div class="xl:col-span-12">
+      <label for="kode" class="inline-block mb-2 text-base font-medium">{{ 'customer-code' | translate | titlecase }} <span class="text-red-500">*</span></label>
+      <input type="text" id="kode" formControlName="kode" class="form-input form-control" [placeholder]="'Input' + ' ' + ('customer-code' | translate)" maxlength="10" />
+      @if (form.get('kode')?.hasError('required') && form.get('kode')?.touched) {
+        <div class="mt-1 text-red-500 text-sm">{{ 'customer-code' | translate }} {{ 'is-required' | translate }}</div>
+      } @else if (form.get('kode')?.hasError('maxLength') && form.get('kode')?.touched) {
+        <div class="mt-1 text-red-500 text-sm">{{ 'customer-code' | translate }} {{ 'cannot-longer-than' | translate }} 10 {{ 'characters' | translate }}</div>
+      }
+    </div>
+    <!--end col-->
+    <div class="xl:col-span-12">
+      <label for="nama" class="inline-block mb-2 text-base font-medium">{{ 'name' | translate | titlecase }} <span class="text-red-500">*</span></label>
+      <input type="text" id="nama" formControlName="nama" class="form-input form-control" [placeholder]="'Input' + ' ' + ('name' | translate)" maxlength="100" />
+      @if (form.get('nama')?.hasError('required') && form.get('nama')?.touched) {
+        <div class="mt-1 text-red-500 text-sm">{{ 'name' | translate }} {{ 'is-required' | translate }}</div>
+      } @else if (form.get('nama')?.hasError('maxLength') && form.get('nama')?.touched) {
+        <div class="mt-1 text-red-500 text-sm">{{ 'name' | translate }} {{ 'cannot-longer-than' }} 100 {{ 'characters' }}</div>
+      }
+    </div>
+    <!--end col-->
+    <div class="xl:col-span-12">
+      <label for="telp" class="inline-block mb-2 text-base font-medium">{{ 'phone' | translate | titlecase }} <span class="text-red-500">*</span></label>
+      <input type="text" id="telp" formControlName="telp" class="form-input form-control" [placeholder]="'Input' + ' ' + ('phone' | translate)" maxlength="20" />
+      @if (form.get('telp')?.hasError('required') && form.get('telp')?.touched) {
+        <div class="mt-1 text-red-500 text-sm">{{ 'phone' | translate }} {{ 'is-required' | translate }}</div>
+      } @else if (form.get('telp')?.hasError('maxLength') && form.get('telp')?.touched) {
+        <div class="mt-1 text-red-500 text-sm">{{ 'phone' | translate }} {{ 'cannot-longer-than' }} 20 {{ 'characters' }}</div>
+      }
+    </div>
+    <!--end col-->
+  </div>
+</form>

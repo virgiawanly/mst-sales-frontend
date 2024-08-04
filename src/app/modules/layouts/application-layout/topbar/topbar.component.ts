@@ -13,11 +13,21 @@ import { changeMode, changesidebarcolor, changesidebarsize, changetopbarcolor } 
 import { getLayout, getLayoutmode, getSidebarcolor, getSidebarsize, getTopbarcolor } from '../../../../store/layout/layout.selectors';
 import { getUser } from '../../../../store/user/user.selectors';
 import { LanguageService } from '../../../../core/services/language.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-topbar',
   standalone: true,
-  imports: [DrawerModule, MnDropdownComponent, LucideAngularModule, SimplebarAngularModule, RouterModule, CommonModule, MDModalModule],
+  imports: [
+    DrawerModule,
+    MnDropdownComponent,
+    LucideAngularModule,
+    SimplebarAngularModule,
+    RouterModule,
+    CommonModule,
+    MDModalModule,
+    TranslateModule,
+  ],
   templateUrl: './topbar.component.html',
   styleUrl: './topbar.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

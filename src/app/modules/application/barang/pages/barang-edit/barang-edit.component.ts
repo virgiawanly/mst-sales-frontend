@@ -7,12 +7,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpFormattedErrorResponse } from '../../../../../../types/http';
 import { PageTitleComponent } from '../../../../../shared/components/page-title/page-title.component';
 import { BarangFormComponent } from '../../components/barang-form/barang-form.component';
-import { Location } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-barang-edit',
   standalone: true,
-  imports: [PageTitleComponent, BarangFormComponent],
+  imports: [PageTitleComponent, BarangFormComponent, CommonModule, TranslateModule],
   templateUrl: './barang-edit.component.html',
   styleUrl: './barang-edit.component.scss',
 })
@@ -29,6 +30,7 @@ export class BarangEditComponent {
     private _location: Location,
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
+    private _translateService: TranslateService,
   ) {
     this.barangId = this._activatedRoute.snapshot.paramMap.get('id');
   }
@@ -60,7 +62,7 @@ export class BarangEditComponent {
         },
         error: (error: HttpFormattedErrorResponse) => {
           if (error.status !== 401) {
-            this._toastService.error(error.message, 'Failed to load data');
+            this._toastService.error(error.message, this._translateService.instant('failed'));
             this._router.navigateByUrl('/application/barang');
           }
         },
@@ -88,12 +90,12 @@ export class BarangEditComponent {
       })
       .subscribe({
         next: (res: any) => {
-          this._toastService.success(res.message, 'Success');
+          this._toastService.success(res.message, this._translateService.instant('success'));
           this._router.navigateByUrl('/application/barang');
         },
         error: (error: HttpFormattedErrorResponse) => {
           if (error.status !== 401) {
-            this._toastService.error(error.message, 'Failed');
+            this._toastService.error(error.message, this._translateService.instant('failed'));
           }
         },
       })

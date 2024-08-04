@@ -82,7 +82,7 @@ export class SalesEditComponent {
     });
 
     if (details.length === 0) {
-      this._toastService.error('Please add at least 1 detail item', 'Failed');
+      this._toastService.error(this._translateService.instant('please-add-at-least-one-item'), this._translateService.instant('failed'));
       return;
     }
 
@@ -109,7 +109,7 @@ export class SalesEditComponent {
         },
         error: (error: HttpFormattedErrorResponse) => {
           if (error.status !== 401) {
-            this._toastService.error(error.message, 'Failed');
+            this._toastService.error(error.message, this._translateService.instant('failed'));
           }
         },
       })

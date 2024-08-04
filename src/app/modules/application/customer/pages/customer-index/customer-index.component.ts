@@ -15,6 +15,7 @@ import { MnDropdownComponent } from '../../../../../shared/components/dropdown';
 import { MDModalModule } from '../../../../../shared/components/modals';
 import { PageTitleComponent } from '../../../../../shared/components/page-title/page-title.component';
 import { NGXPagination } from '../../../../../shared/components/pagination';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-customer-index',
@@ -30,6 +31,7 @@ import { NGXPagination } from '../../../../../shared/components/pagination';
     CommonModule,
     FormsModule,
     RouterLink,
+    TranslateModule,
   ],
   templateUrl: './customer-index.component.html',
   styleUrl: './customer-index.component.scss',
@@ -57,15 +59,16 @@ export class CustomerIndexComponent {
   };
 
   columns: TableColumn[] = [
-    { name: 'Kode Customer', prop: 'kode', width: 150, resizeable: true },
-    { name: 'Nama Customer', prop: 'nama', width: 200, resizeable: true },
-    { name: 'Telp', prop: 'telp', width: 150, resizeable: true },
-    { name: 'Action', prop: 'actions', width: 150, resizeable: true, sortable: false },
+    { name: 'customer-code', prop: 'kode', width: 150, resizeable: true },
+    { name: 'customer-name', prop: 'nama', width: 200, resizeable: true },
+    { name: 'phone', prop: 'telp', width: 150, resizeable: true },
+    { name: 'options', prop: 'actions', width: 150, resizeable: true, sortable: false },
   ];
 
   constructor(
     private _httpService: HttpService,
     private _toastService: ToastService,
+    private _translateService: TranslateService,
   ) {}
 
   ngOnInit() {
@@ -103,7 +106,7 @@ export class CustomerIndexComponent {
         },
         error: (error: HttpFormattedErrorResponse) => {
           if (error.status !== 401) {
-            this._toastService.error(error.message);
+            this._toastService.error(error.message, this._translateService.instant('failed'));
           }
         },
       })
@@ -123,16 +126,16 @@ export class CustomerIndexComponent {
 
     this.isDeletingCustomer = true;
     this._httpService
-      .delete(`web/customer/${this.customerToDelete?.id}`, { headers: { 'Location-Id': 1 } })
+      .delete(`web/customer/${this.customerToDelete?.id}`)
       .subscribe({
         next: (res: any) => {
-          this._toastService.success(res.message, 'Success');
+          this._toastService.success(res.message, this._translateService.instant('success'));
           this.customerPagination.page = 1;
           this.getCustomer();
         },
         error: (error: HttpFormattedErrorResponse) => {
           if (error.status !== 401) {
-            this._toastService.error(error.message);
+            this._toastService.error(error.message, this._translateService.instant('failed'));
           }
         },
       })

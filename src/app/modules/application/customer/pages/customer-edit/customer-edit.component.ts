@@ -1,4 +1,4 @@
-import { Location } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Customer } from '../../../../../../types/customers';
@@ -8,11 +8,12 @@ import { ToastService } from '../../../../../core/services/toast.service';
 import { PageTitleComponent } from '../../../../../shared/components/page-title/page-title.component';
 import { CustomerForm } from '../../components/customer-form/customer-form';
 import { CustomerFormComponent } from '../../components/customer-form/customer-form.component';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-customer-edit',
   standalone: true,
-  imports: [PageTitleComponent, CustomerFormComponent],
+  imports: [PageTitleComponent, CustomerFormComponent, CommonModule, TranslateModule],
   templateUrl: './customer-edit.component.html',
   styleUrl: './customer-edit.component.scss',
 })
@@ -29,6 +30,7 @@ export class CustomerEditComponent {
     private _location: Location,
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
+    private _translateService: TranslateService,
   ) {
     this.customerId = this._activatedRoute.snapshot.paramMap.get('id');
   }
@@ -60,7 +62,7 @@ export class CustomerEditComponent {
         },
         error: (error: HttpFormattedErrorResponse) => {
           if (error.status !== 401) {
-            this._toastService.error(error.message, 'Failed to load data');
+            this._toastService.error(error.message, this._translateService.instant('failed'));
             this._router.navigateByUrl('/application/customer');
           }
         },
@@ -88,12 +90,12 @@ export class CustomerEditComponent {
       })
       .subscribe({
         next: (res: any) => {
-          this._toastService.success(res.message, 'Success');
+          this._toastService.success(res.message, this._translateService.instant('success'));
           this._router.navigateByUrl('/application/customer');
         },
         error: (error: HttpFormattedErrorResponse) => {
           if (error.status !== 401) {
-            this._toastService.error(error.message, 'Failed');
+            this._toastService.error(error.message, this._translateService.instant('failed'));
           }
         },
       })

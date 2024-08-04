@@ -1,13 +1,15 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { BarangForm } from './barang-form';
-import { Barang } from '../../../../../../types/barang';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 import { LucideAngularModule } from 'lucide-angular';
+import { Barang } from '../../../../../../types/barang';
+import { BarangForm } from './barang-form';
 
 @Component({
   selector: 'app-barang-form',
   standalone: true,
-  imports: [ReactiveFormsModule, LucideAngularModule, FormsModule],
+  imports: [ReactiveFormsModule, LucideAngularModule, FormsModule, CommonModule, TranslateModule],
   templateUrl: './barang-form.component.html',
   styleUrl: './barang-form.component.scss',
 })

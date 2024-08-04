@@ -1,4 +1,6 @@
 {
+  "dashboard": "Dashboard",
+  "welcome": "Welcome",
   "sales": "Sales",
   "sales-list": "Sales List",
   "sales-info": "Sales Info",
@@ -8,9 +10,11 @@
   "view-sales": "View Sales",
   "delete-sales": "Delete Sales",
   "sales-form": "Sales Form",
+  "sales-detail": "Sales Detail",
   "details": "Details",
   "sales-details": "Sales Details",
   "sales-items": "Sales Items",
+  "item": "Item",
   "items": "Items",
   "item-list": "Item List",
   "add-item": "Add Item",
@@ -23,6 +27,7 @@
   "item-code": "Item Code",
   "customers": "Customers",
   "customer-list": "Customer List",
+  "customer-details": "Customer Details",
   "customer-info": "Customer Info",
   "customer-code": "Customer Code",
   "customer-name": "Customer Name",
@@ -41,6 +46,7 @@
   "change": "Change",
   "transaction": "Transaction",
   "transaction-number": "Transaction Number",
+  "transaction-date": "Transaction Date",
   "master-data": "Master Data",
   "code": "Code",
   "date": "Date",
@@ -49,6 +55,8 @@
   "discount": "Discount",
   "discounted-price": "Discounted Price",
   "shipping-cost": "Shipping Cost",
+  "qty": "Qty",
+  "total": "Total",
   "total-payment": "Total Payment",
   "is-required": "is required",
   "must-be-greater-than": "must be greater than",
@@ -83,5 +91,6 @@
   "sign-out": "Sign Out",
   "logout": "Logout",
   "logout-confirmation": "Logout Confirmation",
-  "are-you-sure-want-to-logout?": "Are you sure want to logout?"
+  "are-you-sure-want-to-logout?": "Are you sure want to logout?",
+  "created-at": "Created at"
 }

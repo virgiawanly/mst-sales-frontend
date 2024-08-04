@@ -1,1 +1,193 @@
-<p>sales-show works!</p>
+<app-page-title [title]="'sales-detail' | translate" [pagetitle]="'sales' | translate" [pagetitleurl]="'/application/sales'" backbuttonurl="/application/sales"></app-page-title>
+
+@if (sales && !isLoadingSales) {
+  <div class="grid grid-cols-1 gap-x-5 xl:grid-cols-12">
+    <div class="xl:col-span-12">
+      <div class="card print:shadow-none print:border-none">
+        <div class="card-body print:hidden">
+          <div class="flex flex-col gap-5 md:items-center md:flex-row">
+            <div class="grow">
+              <h6 class="mb-1 text-16">#{{ sales.kode }}</h6>
+              <ul class="flex items-center gap-3">
+                <li class="text-slate-500">{{ 'created-at' | translate }}: {{ sales.created_at | date: 'dd MMM yyyy, HH:mm' }}</li>
+              </ul>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <button
+                type="button"
+                class="text-white btn bg-red-500 border-red-500 hover:text-white hover:bg-red-600 hover:border-red-600 focus:text-white focus:bg-red-600 focus:border-red-600 focus:ring focus:ring-red-100 active:text-white active:bg-red-600 active:border-red-600 active:ring active:ring-red-100 dark:ring-red-400/20"
+                [disabled]="isDeletingSales"
+                [appModalTrigger]="'deleteModal'"
+              >
+                <lucide-angular name="trash-2" [class]="'inline-block size-4 ltr:mr-1 rtl:ml-1'"></lucide-angular> <span class="align-middle"> {{ 'delete' | translate | titlecase }}</span>
+              </button>
+              <button
+                [routerLink]="'/application/sales/' + sales.id + '/edit'"
+                class="text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20"
+              >
+                <lucide-angular name="pen" [class]="'inline-block size-4 ltr:mr-1 rtl:ml-1'"></lucide-angular> <span class="align-middle"> {{ 'edit' | translate | titlecase }}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="!pt-0 card-body">
+          <div class="p-5 border rounded-md md:p-8 border-slate-200 dark:border-zink-500 print:p-0">
+            <div class="grid grid-cols-1 gap-5 xl:grid-cols-12">
+              <div class="text-center xl:col-span-2 ltr:xl:text-left rtl:xl:text-right">
+                <div class="flex items-center justify-center size-16 mx-auto rounded-md bg-slate-100 dark:bg-zink-600 xl:mx-0">
+                  <img src="assets/images/logo-sm.png" alt="" class="h-8" />
+                </div>
+                <h5 class="mt-4 mb-1">MST Sales</h5>
+                <p class="text-slate-500 dark:text-zink-200">Sales Order</p>
+              </div>
+              <!--end col-->
+            </div>
+            <!--end grid-->
+
+            <div class="grid grid-cols-1 gap-5 mt-8 md:grid-cols-2">
+              <div>
+                <p class="mb-2 text-sm uppercase text-slate-500 dark:text-zink-200">{{ 'sales-details' | translate | titlecase }}</p>
+                <table>
+                  <tr>
+                    <th class="text-left py-1 pr-5 font-semibold">{{ 'transaction-number' | translate | titlecase }}</th>
+                    <td class="text-left py-1">:</td>
+                    <td class="text-left py-1">{{ sales.kode }}</td>
+                  </tr>
+                  <tr>
+                    <th class="text-left py-1 pr-5 font-semibold">{{ 'transaction-date' | translate | titlecase }}</th>
+                    <td class="text-left py-1">:</td>
+                    <td class="text-left py-1">{{ sales.tgl | date: 'dd/MM/yyyy' }}</td>
+                  </tr>
+                </table>
+              </div>
+              <!--end col-->
+              <div>
+                <p class="mb-2 text-sm uppercase text-slate-500 dark:text-zink-200">{{ 'customer-details' | translate | titlecase }}</p>
+                <table>
+                  <tr>
+                    <th class="text-left py-1 pr-5 font-semibold">{{ 'code' | translate | titlecase }}</th>
+                    <td class="text-left py-1">:</td>
+                    <td class="text-left py-1">{{ sales.customer?.kode }}</td>
+                  </tr>
+                  <tr>
+                    <th class="text-left py-1 pr-5 font-semibold">{{ 'name' | translate | titlecase }}</th>
+                    <td class="text-left py-1">:</td>
+                    <td class="text-left py-1">{{ sales.customer?.nama }}</td>
+                  </tr>
+                  <tr>
+                    <th class="text-left py-1 pr-5 font-semibold">{{ 'phone' | translate | titlecase }}</th>
+                    <td class="text-left py-1">:</td>
+                    <td class="text-left py-1">{{ sales.customer?.telp }}</td>
+                  </tr>
+                </table>
+              </div>
+              <!--end col-->
+            </div>
+            <!--end grid-->
+
+            <div class="mt-6 overflow-x-auto">
+              <table class="w-full whitespace-nowrap">
+                <thead class="ltr:text-left rtl:text-right">
+                  <tr>
+                    <th class="px-3.5 py-2.5 font-semibold text-slate-500 border-b border-slate-200 dark:text-zink-200 dark:border-zink-500">#</th>
+                    <th class="px-3.5 py-2.5 font-semibold text-slate-500 border-b border-slate-200 dark:text-zink-200 dark:border-zink-500">{{ 'item' | translate | titlecase }}</th>
+                    <th class="px-3.5 py-2.5 font-semibold text-slate-500 border-b border-slate-200 dark:text-zink-200 dark:border-zink-500">{{ 'qty' | translate | titlecase }}</th>
+                    <th class="px-3.5 py-2.5 font-semibold text-slate-500 border-b border-slate-200 dark:text-zink-200 dark:border-zink-500">{{ 'label-price' | translate | titlecase }}</th>
+                    <th class="px-3.5 py-2.5 font-semibold text-slate-500 border-b border-slate-200 dark:text-zink-200 dark:border-zink-500">{{ 'discount' | translate | titlecase }} (%)</th>
+                    <th class="px-3.5 py-2.5 font-semibold text-slate-500 border-b border-slate-200 dark:text-zink-200 dark:border-zink-500">{{ 'discount' | translate | titlecase }} (Rp)</th>
+                    <th class="px-3.5 py-2.5 font-semibold text-slate-500 border-b border-slate-200 dark:text-zink-200 dark:border-zink-500">{{ 'discounted-price' | translate | titlecase }} (Rp)</th>
+                    <th class="px-3.5 py-2.5 font-semibold text-slate-500 border-b border-slate-200 dark:text-zink-200 dark:border-zink-500">{{ 'total' | translate | titlecase }} (Rp)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (detail of sales.details; track $index) {
+                    <tr>
+                      <td class="px-3.5 py-2.5 border-b border-slate-200 dark:border-zink-500">{{ $index + 1 }}</td>
+                      <td class="px-3.5 py-2.5 border-b border-slate-200 dark:border-zink-500">
+                        <h6 class="mb-1">{{ detail.barang?.nama }}</h6>
+                        <p class="text-slate-500 dark:text-zink-200">{{ detail.barang?.nama }}</p>
+                      </td>
+                      <td class="px-3.5 py-2.5 border-b border-slate-200 dark:border-zink-500">{{ detail.qty | number: '1.0-0' }}</td>
+                      <td class="px-3.5 py-2.5 border-b border-slate-200 dark:border-zink-500">{{ detail.harga_bandrol | number: '1.2-2' }}</td>
+                      <td class="px-3.5 py-2.5 border-b border-slate-200 dark:border-zink-500">{{ detail.diskon_pct | number: '1.2-2' }}</td>
+                      <td class="px-3.5 py-2.5 border-b border-slate-200 dark:border-zink-500">{{ detail.diskon_nilai | number: '1.2-2' }}</td>
+                      <td class="px-3.5 py-2.5 border-b border-slate-200 dark:border-zink-500">{{ detail.harga_diskon | number: '1.2-2' }}</td>
+                      <td class="px-3.5 py-2.5 border-b border-slate-200 dark:border-zink-500">{{ detail.total | number: '1.2-2' }}</td>
+                    </tr>
+                  }
+                </tbody>
+                <tbody class="before:block before:h-3">
+                  <tr>
+                    <td colspan="6"></td>
+                    <td class="border-b border-slate-200 px-3.5 py-2.5 text-slate-500 dark:border-zink-500 dark:text-zink-200">{{ 'sub-total' | translate | titlecase }} (Rp)</td>
+                    <td class="border-b border-slate-200 px-3.5 py-2.5 text-slate-500 dark:border-zink-500 dark:text-zink-200">{{ sales.subtotal | number: '1.2-2' }}</td>
+                  </tr>
+                  <tr>
+                    <td colspan="6"></td>
+                    <td class="border-b border-slate-200 px-3.5 py-2.5 text-slate-500 dark:border-zink-500 dark:text-zink-200">{{ 'discount' | translate | titlecase }} (Rp)</td>
+                    <td class="border-b border-slate-200 px-3.5 py-2.5 text-slate-500 dark:border-zink-500 dark:text-zink-200">{{ sales.diskon || 0 | number: '1.2-2' }}</td>
+                  </tr>
+                  <tr>
+                    <td colspan="6"></td>
+                    <td class="border-b border-slate-200 px-3.5 py-2.5 text-slate-500 dark:border-zink-500 dark:text-zink-200">{{ 'shipping-cost' | translate | titlecase }} (Rp)</td>
+                    <td class="border-b border-slate-200 px-3.5 py-2.5 text-slate-500 dark:border-zink-500 dark:text-zink-200">{{ sales.ongkir || 0 | number: '1.2-2' }}</td>
+                  </tr>
+                  <tr>
+                    <td colspan="6"></td>
+                    <td class="border-b border-slate-200 px-3.5 py-2.5 font-medium dark:border-zink-500">{{ 'total' | translate | titlecase }} (Rp)</td>
+                    <td class="border-b border-slate-200 px-3.5 py-2.5 font-medium dark:border-zink-500">{{ sales.total_bayar || 0 | number: '1.2-2' }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--end card-->
+    </div>
+    <!--end col-->
+  </div>
+  <!--end row-->
+} @else if (isLoadingSales) {
+  <div class="min-h-[65vh] w-full flex items-center justify-center">
+    <div class="inline-block size-8 border-2 rounded-full animate-spin border-l-transparent border-custom-500"></div>
+  </div>
+}
+
+<!-- delete sales modal -->
+<ng-modals id="deleteModal" [placement]="'modal-center'" className="fixed flex flex-col transition-all duration-300 ease-in-out left-2/4 z-drawer -translate-x-2/4 -translate-y-2/4">
+  <div class="w-screen max-w-[420px] md:w-[25rem] bg-white shadow rounded-md dark:bg-zink-600">
+    <div class="max-h-[calc(theme('height.screen')_-_180px)] overflow-y-auto px-6 py-8">
+      <div class="float-right">
+        <button dismissModal [ModalDismiss]="'deleteModal'" class="transition-all duration-200 ease-linear text-slate-500 hover:text-red-500">
+          <i data-lucide="x" class="size-5"></i>
+        </button>
+      </div>
+      <img src="assets/images/delete.png" class="block h-12 mx-auto" />
+      <div class="mt-5 text-center">
+        <h5 class="mb-1 font-bold text-red-500">{{ 'warning' | translate }}</h5>
+        <p class="text-slate-500 dark:text-zink-200">{{ 'are-you-sure-want-to-delete-this-data?' | translate }}</p>
+        <div class="flex justify-center gap-2 mt-6">
+          <button
+            type="reset"
+            dismissModal
+            [ModalDismiss]="'deleteModal'"
+            class="bg-white text-slate-500 btn hover:text-slate-500 hover:bg-slate-100 focus:text-slate-500 focus:bg-slate-100 active:text-slate-500 active:bg-slate-100 dark:bg-zink-600 dark:hover:bg-slate-500/10 dark:focus:bg-slate-500/10 dark:active:bg-slate-500/10"
+          >
+            {{ 'cancel' | translate }}
+          </button>
+          <button
+            type="submit"
+            (click)="deleteSales()"
+            dismissModal
+            [ModalDismiss]="'deleteModal'"
+            class="text-white bg-red-500 border-red-500 btn hover:text-white hover:bg-red-600 hover:border-red-600 focus:text-white focus:bg-red-600 focus:border-red-600 focus:ring focus:ring-red-100 active:text-white active:bg-red-600 active:border-red-600 active:ring active:ring-red-100 dark:ring-custom-400/20"
+          >
+            {{ 'yes-delete-it!' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-modals>
+<!-- ! delete sales modal -->

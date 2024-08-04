@@ -4,11 +4,13 @@ import { Store } from '@ngrx/store';
 import { getUser } from '../../../../../store/user/user.selectors';
 import { Subject, takeUntil } from 'rxjs';
 import { User } from '../../../../../../types/users';
+import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [PageTitleComponent],
+  imports: [PageTitleComponent, TranslateModule, CommonModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })

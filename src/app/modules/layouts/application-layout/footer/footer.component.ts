@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
     >
       <div class="group-data-[layout=horizontal]:mx-auto group-data-[layout=horizontal]:max-w-screen-2xl w-full">
         <div class="grid items-center grid-cols-1 text-center lg:grid-cols-2 text-slate-400 dark:text-zink-200 ltr:lg:text-left rtl:lg:text-right">
-          <div>{{ year }} © 2024 mstsales</div>
+          <div>© {{ year }} MST Sales. All right reserved.</div>
           <div class="hidden lg:block">
             <div class="ltr:text-right rtl:text-left">v1.0.0</div>
           </div>

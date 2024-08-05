@@ -10,7 +10,7 @@ export const MENU: MenuItem[] = [
     id: 1,
     label: 'dashboard',
     icon: 'home',
-    link: '/application',
+    link: '/application/dashboard',
   },
   {
     id: 1,

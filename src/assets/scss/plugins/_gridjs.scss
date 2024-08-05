@@ -16,7 +16,7 @@ input.gridjs-input {
   @apply border-slate-200 bg-white dark:border-zink-500 dark:bg-zink-700;
 
   &:focus {
-    @apply shadow-none border-custom-500;
+    @apply border-custom-500 shadow-none;
   }
 }
 
@@ -28,17 +28,17 @@ input.gridjs-input {
       @apply border-slate-200 bg-white dark:border-zink-500 dark:bg-zink-700;
 
       &:focus {
-        @apply shadow-md border-r border-slate-200 dark:border-zink-500;
+        @apply border-r border-slate-200 shadow-md dark:border-zink-500;
       }
 
       &:hover {
-        @apply text-slate-600 bg-slate-50 dark:bg-zink-600 dark:text-zink-100;
+        @apply bg-slate-50 text-slate-600 dark:bg-zink-600 dark:text-zink-100;
       }
 
       &:disabled,
       &[disabled],
       &:hover:disabled {
-        @apply text-slate-400 bg-white dark:bg-zink-700 dark:text-zink-200;
+        @apply bg-white text-slate-400 dark:bg-zink-700 dark:text-zink-200;
       }
 
       &.gridjs-spread,
@@ -65,7 +65,7 @@ td {
 
 th {
   &.gridjs-th {
-    @apply text-slate-600 bg-slate-50 border-slate-200 dark:border-zink-500 dark:text-zink-100 dark:bg-zink-600;
+    @apply border-slate-200 bg-slate-50 text-slate-600 dark:border-zink-500 dark:bg-zink-600 dark:text-zink-100;
   }
 
   &.gridjs-th-sort {

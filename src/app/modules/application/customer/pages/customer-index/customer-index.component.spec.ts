@@ -8,10 +8,9 @@ describe('CustomerIndexComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CustomerIndexComponent]
-    })
-    .compileComponents();
-    
+      imports: [CustomerIndexComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(CustomerIndexComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

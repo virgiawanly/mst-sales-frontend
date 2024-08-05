@@ -29,7 +29,7 @@ import { ModalService } from './modal.service';
       </div>
     </ng-container>
 
-    <div class="fixed inset-0 bg-slate-900/40 dark:bg-zink-800/70 z-[1049] backdrop-overlay" [ngClass]="{ hidden: !isOpen }" id="backDropDiv"></div>
+    <div class="backdrop-overlay fixed inset-0 z-[1049] bg-slate-900/40 dark:bg-zink-800/70" [ngClass]="{ hidden: !isOpen }" id="backDropDiv"></div>
   `,
   encapsulation: ViewEncapsulation.None,
 })

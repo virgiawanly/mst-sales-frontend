@@ -1,6 +1,6 @@
-<div class="flex items-center justify-center min-h-screen py-16 lg:py-10 bg-zinc-50 dark:bg-zink-800 dark:text-zink-100 font-public">
+<div class="flex min-h-screen items-center justify-center bg-zinc-50 py-16 font-public dark:bg-zink-800 dark:text-zink-100 lg:py-10">
   <div class="relative">
-    <div class="absolute hidden opacity-50 ltr:-left-16 rtl:-right-16 -top-10 md:block">
+    <div class="absolute -top-10 hidden opacity-50 md:block ltr:-left-16 rtl:-right-16">
       <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 125 316" width="125" height="316">
         <title>&lt;Group&gt;</title>
         <g id="&lt;Group&gt;">
@@ -20,7 +20,7 @@
       </svg>
     </div>
 
-    <div class="absolute hidden -rotate-180 opacity-50 ltr:-right-16 rtl:-left-16 -bottom-10 md:block">
+    <div class="absolute -bottom-10 hidden -rotate-180 opacity-50 md:block ltr:-right-16 rtl:-left-16">
       <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 125 316" width="125" height="316">
         <title>&lt;Group&gt;</title>
         <g id="&lt;Group&gt;">
@@ -40,33 +40,33 @@
       </svg>
     </div>
 
-    <div class="mb-0 w-screen lg:mx-auto lg:w-[500px] card shadow-lg border-none shadow-slate-100 relative">
-      <div class="!px-10 !py-12 card-body">
+    <div class="card relative mb-0 w-screen border-none shadow-lg shadow-slate-100 lg:mx-auto lg:w-[500px]">
+      <div class="card-body !px-10 !py-12">
         <a routerLink="/">
-          <img src="assets/images/logo-default.png" class="h-auto w-36 object-cover mx-auto block dark:hidden" />
-          <img src="assets/images/logo-white.png" class="h-auto w-36 object-cover mx-auto hidden dark:block" />
+          <img src="assets/images/logo-default.png" class="mx-auto block h-auto w-36 object-cover dark:hidden" />
+          <img src="assets/images/logo-white.png" class="mx-auto hidden h-auto w-36 object-cover dark:block" />
         </a>
         <div class="mt-8 text-center">
-          <h4 class="text-2xl mb-1 text-gray-800 dark:text-custom-500">Sign In</h4>
+          <h4 class="mb-1 text-2xl text-gray-800 dark:text-custom-500">Sign In</h4>
           <p class="text-slate-500 dark:text-zink-200">Welcome back! Please sign in to continue.</p>
         </div>
         <form [formGroup]="loginForm" (ngSubmit)="login()" class="mt-10" id="signInForm">
           @if (errorMessage) {
-            <div class="flex gap-1 px-4 py-3 text-sm text-red-500 border border-red-200 rounded-md md:items-start bg-red-50 dark:bg-red-400/20 dark:border-red-500/50 mb-5">
+            <div class="mb-5 flex gap-1 rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-500 dark:border-red-500/50 dark:bg-red-400/20 md:items-start">
               <lucide-angular name="circle-alert" [class]="'h-4'"></lucide-angular>
               <div>{{ errorMessage }}</div>
             </div>
           }
           <div class="mb-3">
-            <label for="username" class="inline-block mb-2 text-base font-medium">Username or Email</label>
-            <input type="text" id="username-or-email" formControlName="username_or_email" class="form-input form-control" placeholder="Enter username or email" />
+            <label for="username" class="mb-2 inline-block text-base font-medium">Username or Email</label>
+            <input type="text" id="username-or-email" formControlName="username_or_email" class="form-control form-input" placeholder="Enter username or email" />
             @if (loginForm.get('username_or_email')?.hasError('required') && loginForm.get('username_or_email')?.touched) {
               <div id="username-or-email-error" class="mt-1 text-sm text-red-500">Username or email is required</div>
             }
           </div>
           <div class="mb-3">
-            <label for="password" class="inline-block mb-2 text-base font-medium">Password</label>
-            <input type="password" id="password" formControlName="password" class="form-input form-control" placeholder="Enter password" />
+            <label for="password" class="mb-2 inline-block text-base font-medium">Password</label>
+            <input type="password" id="password" formControlName="password" class="form-control form-input" placeholder="Enter password" />
             @if (loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched) {
               <div id="username-or-email-error" class="mt-1 text-sm text-red-500">Password is required</div>
             }
@@ -75,10 +75,10 @@
             <button
               type="submit"
               [disabled]="isLoggingIn"
-              class="w-full text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-900 hover:border-custom-900 focus:text-white focus:bg-custom-900 focus:border-custom-900 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-900 active:border-custom-900 active:ring active:ring-custom-100 dark:ring-custom-400/20 disabled:opacity-50"
+              class="btn w-full border-custom-500 bg-custom-500 text-white hover:border-custom-900 hover:bg-custom-900 hover:text-white focus:border-custom-900 focus:bg-custom-900 focus:text-white focus:ring focus:ring-custom-100 active:border-custom-900 active:bg-custom-900 active:text-white active:ring active:ring-custom-100 disabled:opacity-50 dark:ring-custom-400/20"
             >
               @if (isLoggingIn) {
-                <div class="inline-block size-3 border-2 rounded-full animate-spin border-l-transparent border-white"></div>
+                <div class="inline-block size-3 animate-spin rounded-full border-2 border-white border-l-transparent"></div>
               } @else {
                 <span>Sign In</span>
               }

@@ -4,8 +4,7 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { apiLanguageInterceptor } from './api-language.interceptor';
 
 describe('apiLanguageInterceptor', () => {
-  const interceptor: HttpInterceptorFn = (req, next) => 
-    TestBed.runInInjectionContext(() => apiLanguageInterceptor(req, next));
+  const interceptor: HttpInterceptorFn = (req, next) => TestBed.runInInjectionContext(() => apiLanguageInterceptor(req, next));
 
   beforeEach(() => {
     TestBed.configureTestingModule({});

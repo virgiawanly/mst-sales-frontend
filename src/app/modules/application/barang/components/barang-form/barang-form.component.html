@@ -2,32 +2,32 @@
   <button type="submit" class="hidden"></button>
   <div class="grid grid-cols-1 gap-5 lg:grid-cols-2 xl:grid-cols-12">
     <div class="xl:col-span-12">
-      <label for="kode" class="inline-block mb-2 text-base font-medium">{{ 'item-code' | translate | titlecase }} <span class="text-red-500">*</span></label>
-      <input type="text" id="kode" formControlName="kode" class="form-input form-control" [placeholder]="'Input' + ' ' + ('item-code' | translate)" maxlength="10" />
+      <label for="kode" class="mb-2 inline-block text-base font-medium">{{ 'item-code' | translate | titlecase }} <span class="text-red-500">*</span></label>
+      <input type="text" id="kode" formControlName="kode" class="form-control form-input" [placeholder]="'Input' + ' ' + ('item-code' | translate)" maxlength="10" />
       @if (form.get('kode')?.hasError('required') && form.get('kode')?.touched) {
-        <div class="mt-1 text-red-500 text-sm">{{ 'item-code' | translate }} {{ 'is-required' | translate }}</div>
+        <div class="mt-1 text-sm text-red-500">{{ 'item-code' | translate }} {{ 'is-required' | translate }}</div>
       } @else if (form.get('kode')?.hasError('maxLength') && form.get('kode')?.touched) {
-        <div class="mt-1 text-red-500 text-sm">{{ 'item-code' | translate }} {{ 'cannot-longer-than' | translate }} 10 {{ 'characters' | translate }}</div>
+        <div class="mt-1 text-sm text-red-500">{{ 'item-code' | translate }} {{ 'cannot-longer-than' | translate }} 10 {{ 'characters' | translate }}</div>
       }
     </div>
     <!--end col-->
     <div class="xl:col-span-12">
-      <label for="nama" class="inline-block mb-2 text-base font-medium">{{ 'name' | translate | titlecase }} <span class="text-red-500">*</span></label>
-      <input type="text" id="nama" formControlName="nama" class="form-input form-control" [placeholder]="'Input' + ' ' + ('name' | translate)" maxlength="100" />
+      <label for="nama" class="mb-2 inline-block text-base font-medium">{{ 'name' | translate | titlecase }} <span class="text-red-500">*</span></label>
+      <input type="text" id="nama" formControlName="nama" class="form-control form-input" [placeholder]="'Input' + ' ' + ('name' | translate)" maxlength="100" />
       @if (form.get('nama')?.hasError('required') && form.get('nama')?.touched) {
-        <div class="mt-1 text-red-500 text-sm">{{ 'item-name' | translate }} {{ 'is-required' | translate }}</div>
+        <div class="mt-1 text-sm text-red-500">{{ 'item-name' | translate }} {{ 'is-required' | translate }}</div>
       } @else if (form.get('nama')?.hasError('maxLength') && form.get('nama')?.touched) {
-        <div class="mt-1 text-red-500 text-sm">{{ 'item-name' | translate }} {{ 'cannot-longer-than' | translate }} 100 {{ 'characters' | translate }}</div>
+        <div class="mt-1 text-sm text-red-500">{{ 'item-name' | translate }} {{ 'cannot-longer-than' | translate }} 100 {{ 'characters' | translate }}</div>
       }
     </div>
     <!--end col-->
     <div class="xl:col-span-12">
-      <label for="harga" class="inline-block mb-2 text-base font-medium">{{ 'price' | translate | titlecase }} <span class="text-red-500">*</span></label>
-      <input type="number" id="harga" formControlName="harga" class="form-input form-control" [placeholder]="'Input' + ' ' + ('price' | translate)" />
+      <label for="harga" class="mb-2 inline-block text-base font-medium">{{ 'price' | translate | titlecase }} <span class="text-red-500">*</span></label>
+      <input type="number" id="harga" formControlName="harga" class="form-control form-input" [placeholder]="'Input' + ' ' + ('price' | translate)" />
       @if (form.get('harga')?.hasError('required') && form.get('harga')?.touched) {
-        <div class="mt-1 text-red-500 text-sm">{{ 'price' | translate }} {{ 'is-required' | translate }}</div>
+        <div class="mt-1 text-sm text-red-500">{{ 'price' | translate }} {{ 'is-required' | translate }}</div>
       } @else if (form.get('harga')?.hasError('min') && form.get('harga')?.touched) {
-        <div class="mt-1 text-red-500 text-sm">{{ 'price' | translate }} {{ 'must-be-greater-than-or-equal-to' | translate }} 0</div>
+        <div class="mt-1 text-sm text-red-500">{{ 'price' | translate }} {{ 'must-be-greater-than-or-equal-to' | translate }} 0</div>
       }
     </div>
     <!--end col-->

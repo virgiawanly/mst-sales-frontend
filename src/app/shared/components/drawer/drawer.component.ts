@@ -7,7 +7,7 @@ import { DrawerService } from './drawer.service';
   template: `
     <div *ngIf="isOpen">
       <div
-        class="fixed flex flex-col w-full transition-transform duration-300 ease-in-out transform bg-white shadow z-drawer show dark:bg-zink-600"
+        class="show fixed z-drawer flex w-full transform flex-col bg-white shadow transition-transform duration-300 ease-in-out dark:bg-zink-600"
         [ngClass]="getClass()"
       >
         <ng-content></ng-content>

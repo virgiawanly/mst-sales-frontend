@@ -5,11 +5,11 @@
     <div class="card">
       <div class="card-body">
         <div class="flex items-center">
-          <h6 class="text-15 grow">{{ 'item-list' | translate | titlecase }}</h6>
-          <div class="shrink-0 flex items-center gap-3">
+          <h6 class="grow text-15">{{ 'item-list' | translate | titlecase }}</h6>
+          <div class="flex shrink-0 items-center gap-3">
             <button
               routerLink="/application/barang/create"
-              class="text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20"
+              class="btn border-custom-500 bg-custom-500 text-white hover:border-custom-600 hover:bg-custom-600 hover:text-white focus:border-custom-600 focus:bg-custom-600 focus:text-white focus:ring focus:ring-custom-100 active:border-custom-600 active:bg-custom-600 active:text-white active:ring active:ring-custom-100 dark:ring-custom-400/20"
             >
               <lucide-angular name="plus" [class]="'inline-block size-4'"></lucide-angular>
               <span class="align-middle"> {{ 'add-item' | translate | titlecase }}</span>
@@ -17,12 +17,12 @@
           </div>
         </div>
       </div>
-      <div class="!py-3.5 card-body border-y border-dashed border-slate-200 dark:border-zink-500">
+      <div class="card-body border-y border-dashed border-slate-200 !py-3.5 dark:border-zink-500">
         <div class="grid grid-cols-1 gap-5 md:grid-cols-12">
           <div class="relative md:col-span-6 lg:col-span-4">
             <input
               type="text"
-              class="ltr:pl-8 rtl:pr-8 search form-input form-control"
+              class="search form-control form-input ltr:pl-8 rtl:pr-8"
               [placeholder]="'search-items-placeholder' | translate"
               autocomplete="off"
               [(ngModel)]="barangSearch"
@@ -30,7 +30,7 @@
             />
             <lucide-angular
               name="search"
-              [class]="'inline-block size-4 absolute ltr:left-2.5 rtl:right-2.5 top-2.5 text-slate-500 dark:text-zink-200 fill-slate-100 dark:fill-zink-600'"
+              [class]="'absolute top-2.5 inline-block size-4 fill-slate-100 text-slate-500 dark:fill-zink-600 dark:text-zink-200 ltr:left-2.5 rtl:right-2.5'"
             ></lucide-angular>
           </div>
         </div>
@@ -73,14 +73,14 @@
                     <div class="flex gap-3">
                       <a
                         [routerLink]="'/application/barang/' + row.id + '/edit'"
-                        class="flex items-center justify-center size-8 transition-all duration-200 ease-linear rounded-md edit-item-btn bg-slate-100 text-slate-500 hover:text-custom-500 hover:bg-custom-100 dark:bg-zink-600 dark:text-zink-200 dark:hover:bg-custom-500/20 dark:hover:text-custom-500"
+                        class="edit-item-btn flex size-8 items-center justify-center rounded-md bg-slate-100 text-slate-500 transition-all duration-200 ease-linear hover:bg-custom-100 hover:text-custom-500 dark:bg-zink-600 dark:text-zink-200 dark:hover:bg-custom-500/20 dark:hover:text-custom-500"
                       >
                         <lucide-angular name="pencil" [class]="'size-4'"></lucide-angular>
                       </a>
                       <a
                         (click)="setBarangToDelete(row)"
                         [appModalTrigger]="'deleteModal'"
-                        class="cursor-pointer flex items-center justify-center size-8 transition-all duration-200 ease-linear rounded-md remove-item-btn bg-slate-100 text-slate-500 hover:text-custom-500 hover:bg-custom-100 dark:bg-zink-600 dark:text-zink-200 dark:hover:bg-custom-500/20 dark:hover:text-custom-500"
+                        class="remove-item-btn flex size-8 cursor-pointer items-center justify-center rounded-md bg-slate-100 text-slate-500 transition-all duration-200 ease-linear hover:bg-custom-100 hover:text-custom-500 dark:bg-zink-600 dark:text-zink-200 dark:hover:bg-custom-500/20 dark:hover:text-custom-500"
                       >
                         <lucide-angular name="trash-2" [class]="'size-4'"></lucide-angular>
                       </a>
@@ -97,8 +97,8 @@
             @if (barang.length) {
               <ngx-datatable-footer class="barangTablefooter">
                 <ng-template ngx-datatable-footer-template>
-                  <div class="px-5 flex items-center justify-center md:justify-between w-full">
-                    <div class="grow hidden md:block">
+                  <div class="flex w-full items-center justify-center px-5 md:justify-between">
+                    <div class="hidden grow md:block">
                       <p class="text-slate-500 dark:text-zink-200">
                         Showing <b>{{ barang.length }}</b> of <b>{{ barangPagination.totalItems }}</b> Results
                       </p>
@@ -124,8 +124,8 @@
           @if (!barang.length && isLoadingBarang) {
             <!-- loading -->
             <div class="noresult">
-              <div class="h-36 text-center grid place-items-center">
-                <div class="inline-block size-4 border-2 rounded-full animate-spin border-l-transparent border-custom-500"></div>
+              <div class="grid h-36 place-items-center text-center">
+                <div class="inline-block size-4 animate-spin rounded-full border-2 border-custom-500 border-l-transparent"></div>
               </div>
             </div>
             <!-- ! loading -->
@@ -134,10 +134,10 @@
           @if (!barang.length && !isLoadingBarang) {
             <!-- no result -->
             <div class="noresult">
-              <div class="h-36 grid place-items-center">
+              <div class="grid h-36 place-items-center">
                 <div class="text-center">
-                  <lucide-angular name="search" [class]="'size-6 mx-auto text-sky-500 fill-sky-100 dark:fill-sky-500/20'"></lucide-angular>
-                  <p class="mt-2 mb-0 text-slate-500 dark:text-zink-200">
+                  <lucide-angular name="search" [class]="'mx-auto size-6 fill-sky-100 text-sky-500 dark:fill-sky-500/20'"></lucide-angular>
+                  <p class="mb-0 mt-2 text-slate-500 dark:text-zink-200">
                     <span>{{ 'no-data-found' | translate | titlecase }}</span>
                   </p>
                 </div>
@@ -156,23 +156,23 @@
 
 <!-- delete barang modal -->
 <ng-modals id="deleteModal" [placement]="'modal-center'" className="fixed flex flex-col transition-all duration-300 ease-in-out left-2/4 z-drawer -translate-x-2/4 -translate-y-2/4">
-  <div class="w-screen max-w-[420px] md:w-[25rem] bg-white shadow rounded-md dark:bg-zink-600">
+  <div class="w-screen max-w-[420px] rounded-md bg-white shadow dark:bg-zink-600 md:w-[25rem]">
     <div class="max-h-[calc(theme('height.screen')_-_180px)] overflow-y-auto px-6 py-8">
       <div class="float-right">
-        <button dismissModal [ModalDismiss]="'deleteModal'" class="transition-all duration-200 ease-linear text-slate-500 hover:text-red-500">
+        <button dismissModal [ModalDismiss]="'deleteModal'" class="text-slate-500 transition-all duration-200 ease-linear hover:text-red-500">
           <i data-lucide="x" class="size-5"></i>
         </button>
       </div>
-      <img src="assets/images/delete.png" alt="" class="block h-12 mx-auto" />
+      <img src="assets/images/delete.png" alt="" class="mx-auto block h-12" />
       <div class="mt-5 text-center">
         <h5 class="mb-1 font-bold text-red-500">{{ 'warning' | translate }}</h5>
         <p class="text-slate-500 dark:text-zink-200">{{ 'are-you-sure-want-to-delete-this-data?' | translate }}</p>
-        <div class="flex justify-center gap-2 mt-6">
+        <div class="mt-6 flex justify-center gap-2">
           <button
             type="reset"
             dismissModal
             [ModalDismiss]="'deleteModal'"
-            class="bg-white text-slate-500 btn hover:text-slate-500 hover:bg-slate-100 focus:text-slate-500 focus:bg-slate-100 active:text-slate-500 active:bg-slate-100 dark:bg-zink-600 dark:hover:bg-slate-500/10 dark:focus:bg-slate-500/10 dark:active:bg-slate-500/10"
+            class="btn bg-white text-slate-500 hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 active:bg-slate-100 active:text-slate-500 dark:bg-zink-600 dark:hover:bg-slate-500/10 dark:focus:bg-slate-500/10 dark:active:bg-slate-500/10"
           >
             {{ 'cancel' | translate | titlecase }}
           </button>
@@ -181,7 +181,7 @@
             (click)="deleteBarang()"
             dismissModal
             [ModalDismiss]="'deleteModal'"
-            class="text-white bg-red-500 border-red-500 btn hover:text-white hover:bg-red-600 hover:border-red-600 focus:text-white focus:bg-red-600 focus:border-red-600 focus:ring focus:ring-red-100 active:text-white active:bg-red-600 active:border-red-600 active:ring active:ring-red-100 dark:ring-custom-400/20"
+            class="btn border-red-500 bg-red-500 text-white hover:border-red-600 hover:bg-red-600 hover:text-white focus:border-red-600 focus:bg-red-600 focus:text-white focus:ring focus:ring-red-100 active:border-red-600 active:bg-red-600 active:text-white active:ring active:ring-red-100 dark:ring-custom-400/20"
           >
             {{ 'yes-delete-it!' | translate | titlecase }}
           </button>

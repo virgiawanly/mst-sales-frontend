@@ -8,10 +8,9 @@ describe('CustomerFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CustomerFormComponent]
-    })
-    .compileComponents();
-    
+      imports: [CustomerFormComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(CustomerFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
